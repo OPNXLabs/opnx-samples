@@ -1,0 +1,76 @@
+<Window x:Class="OPNX.Samples.RtspMultiLiveViewer.CameraRegistrationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:opnx="clr-namespace:OPNX.UI.WPF.Controls;assembly=OPNX.UI.WPF"
+        x:Name="cameraRegistrationWindow"
+        Title="Add Camera"
+        Width="460"
+        Height="286"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="False"
+        ResizeMode="NoResize"
+        Background="{StaticResource Sample.Background}"
+        KeyUp="CameraRegistrationWindow_KeyUp">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <opnx:OpnxTitlebar Grid.Row="0"
+                           Background="{StaticResource Sample.Panel}"
+                           ButtonForeground="{StaticResource Sample.Text}"
+                           ButtonMouseOverOpacity="0.7"
+                           ButtonPressedOpacity="0.45"
+                           ButtonSize="30"
+                           ButtonImageSize="15"
+                           ShowMaximizeButton="False"
+                           ShowMinimizeButton="False"
+                           TitleContentMargin="15,0,0,0"
+                           TitleContent="{Binding Title, RelativeSource={RelativeSource AncestorType=Window}}" />
+
+        <Grid Grid.Row="1" Margin="40,24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32" />
+                <RowDefinition Height="8" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="8" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="8" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="32" />
+            </Grid.RowDefinitions>
+
+            <opnx:OpnxTextBox PlaceholderText="Input Camera Name"
+                              Text="{Binding ElementName=cameraRegistrationWindow, Path=CameraName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <opnx:OpnxTextBox Grid.Row="2"
+                              PlaceholderText="Input RTSP URL"
+                              Text="{Binding ElementName=cameraRegistrationWindow, Path=RtspUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <opnx:OpnxTextBox Grid.Row="4"
+                              PlaceholderText="Camera Account"
+                              Text="{Binding ElementName=cameraRegistrationWindow, Path=CameraAccount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <opnx:OpnxPasswordBox Grid.Row="6"
+                                  PlaceholderText="Camera Password"
+                                  Password="{Binding ElementName=cameraRegistrationWindow, Path=CameraPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Grid Grid.Row="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <opnx:OpnxButton Content="Cancel"
+                                 Click="CancelButton_Click" />
+                <opnx:OpnxButton Grid.Column="2"
+                                 Content="OK"
+                                 Click="OkButton_Click" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

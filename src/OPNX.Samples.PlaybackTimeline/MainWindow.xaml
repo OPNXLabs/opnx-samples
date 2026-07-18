@@ -1,0 +1,188 @@
+﻿<Window x:Class="OPNX.Samples.PlaybackTimeline.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:opnx="clr-namespace:OPNX.UI.WPF.Controls;assembly=OPNX.UI.WPF"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="False"
+        WindowStyle="None"
+        Background="{StaticResource Sample.Background}" Foreground="White"
+        ResizeMode="CanResize"
+        Title="OPNX Playback Timeline Sample"
+        Height="620"
+        Width="1100"
+        MinHeight="520"
+        MinWidth="900" Loaded="Window_Loaded" WindowState="Maximized">
+    <Window.Resources>
+        <SolidColorBrush x:Key="Timeline.Recording.Amber" Color="#FFFFC000" />
+        <SolidColorBrush x:Key="Timeline.Recording.Green" Color="#FF45C486" />
+        <SolidColorBrush x:Key="Timeline.Recording.Blue" Color="#FF4C8DFF" />
+        <SolidColorBrush x:Key="Timeline.Row.Dark" Color="#66000000" />
+        <SolidColorBrush x:Key="Timeline.Row.Blue" Color="#FFADD8E6" />
+        <SolidColorBrush x:Key="Timeline.Row.Transparent" Color="Transparent" />
+        <SolidColorBrush x:Key="Timeline.Selected.Blue" Color="#FF73B2F2" />
+        <SolidColorBrush x:Key="Timeline.Selected.Green" Color="#FF45C486" />
+        <SolidColorBrush x:Key="Timeline.Selected.Orange" Color="#FFF08A4B" />
+    </Window.Resources>
+    <Grid Background="{StaticResource Sample.Background}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <opnx:OpnxTitlebar Grid.Row="0"
+                           Background="{StaticResource Sample.Panel}"
+                           ButtonForeground="{StaticResource Sample.Text}"
+                           ButtonMouseOverOpacity="0.7"
+                           ButtonPressedOpacity="0.45"
+                           ButtonSize="32"
+                           ButtonImageSize="16"
+                           ButtonMargin="6,0,0,0"
+                           ControlBoxMargin="18,0,12,0"
+                           MinimizeToolTip="Minimize"
+                           MaximizeToolTip="Maximize"
+                           RestoreToolTip="Restore"
+                           CloseToolTip="Close"
+                           ShowMaximizeButton="False">
+            <opnx:OpnxTitlebar.TitleContent>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Width="10"
+                            Height="10"
+                            Margin="16,0,10,0"
+                            Background="{StaticResource Sample.Accent}" />
+                    <TextBlock Text="OPNX Playback Timeline"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="SemiBold" />
+                    <TextBlock Text="Sample"
+                               Margin="10,0,0,0"
+                               VerticalAlignment="Center"
+                               FontSize="12"
+                               Foreground="{StaticResource Sample.Muted}" />
+                </StackPanel>
+            </opnx:OpnxTitlebar.TitleContent>
+        </opnx:OpnxTitlebar>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="gOptions"
+                  Grid.Row="0"
+                  Margin="12"
+                  Background="{StaticResource Sample.Panel}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <WrapPanel Margin="12,10,12,4">
+                    <TextBlock Width="90" VerticalAlignment="Center" Text="Row height"  Foreground="White"/>
+                    <Slider Width="120"
+                            Minimum="20"
+                            Maximum="60"
+                            TickFrequency="1"
+                            IsSnapToTickEnabled="True"
+                            Value="{Binding ElementName=timeline, Path=TimelineRowHeight, Mode=TwoWay}" />
+                    <TextBlock Width="32"
+                               Margin="6,0,18,0"
+                               VerticalAlignment="Center"
+                               Text="{Binding ElementName=timeline, Path=TimelineRowHeight, StringFormat={}{0:0}}"  Foreground="White"/>
+
+                    <TextBlock Width="90" VerticalAlignment="Center" Text="Bar height"  Foreground="White"/>
+                    <Slider Width="120"
+                            Minimum="4"
+                            Maximum="{Binding ElementName=timeline, Path=TimelineRowHeight}"
+                            TickFrequency="1"
+                            IsSnapToTickEnabled="True"
+                            Value="{Binding ElementName=timeline, Path=RecordingBarHeight, Mode=TwoWay}" />
+                    <TextBlock Width="32"
+                               Margin="6,0,18,0"
+                               VerticalAlignment="Center"
+                               Text="{Binding ElementName=timeline, Path=RecordingBarHeight, StringFormat={}{0:0}}"  Foreground="White"/>
+
+                    <TextBlock Width="80" VerticalAlignment="Center" Text="Top offset"  Foreground="White"/>
+                    <Slider Width="100"
+                            Minimum="0"
+                            Maximum="20"
+                            TickFrequency="1"
+                            IsSnapToTickEnabled="True"
+                            Value="{Binding ElementName=timeline, Path=TimelineTopOffset, Mode=TwoWay}" />
+                    <TextBlock Width="28"
+                               Margin="6,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="{Binding ElementName=timeline, Path=TimelineTopOffset, StringFormat={}{0:0}}"  Foreground="White"/>
+                </WrapPanel>
+
+                <WrapPanel Grid.Row="1" Margin="12,4,12,10">
+                    <CheckBox Margin="0,0,18,0"
+                              VerticalAlignment="Center"
+                              Foreground="{StaticResource Sample.Text}"
+                              Content="Left panel"
+                              IsChecked="{Binding ElementName=timeline, Path=IsLeftPanelVisible, Mode=TwoWay}" />
+                    <CheckBox Margin="0,0,24,0"
+                              VerticalAlignment="Center"
+                              Foreground="{StaticResource Sample.Text}"
+                              Content="Entity names"
+                              IsChecked="{Binding ElementName=timeline, Path=ShowEntityNameOnTimeline, Mode=TwoWay}" />
+
+                    <TextBlock Margin="0,0,6,0" VerticalAlignment="Center" Text="Recording"  Foreground="White"/>
+                    <ComboBox Width="90"
+                              Margin="0,0,18,0"
+                              SelectedIndex="0" Foreground="{Binding ElementName=timeline, Path=RecordingBrush}"
+                              SelectedValuePath="Tag"
+                              SelectedValue="{Binding ElementName=timeline, Path=RecordingBrush, Mode=TwoWay}">
+                        <ComboBoxItem Tag="{StaticResource Timeline.Recording.Amber}" Foreground="{StaticResource Timeline.Recording.Amber}">Amber</ComboBoxItem>
+                        <ComboBoxItem Tag="{StaticResource Timeline.Recording.Green}" Foreground="{StaticResource Timeline.Recording.Green}">Green</ComboBoxItem>
+                        <ComboBoxItem Tag="{StaticResource Timeline.Recording.Blue}" Foreground="{StaticResource Timeline.Recording.Blue}">Blue</ComboBoxItem>
+                    </ComboBox>
+
+                    <TextBlock Margin="0,0,6,0" VerticalAlignment="Center" Text="Row"  Foreground="White"/>
+                    <ComboBox Width="100" Foreground="{Binding ElementName=timeline, Path=TimelineRowBackground}"
+                              Margin="0,0,18,0"
+                              SelectedIndex="0"
+                              SelectedValuePath="Tag"
+                              SelectedValue="{Binding ElementName=timeline, Path=TimelineRowBackground, Mode=TwoWay}">
+                        <ComboBoxItem Tag="{StaticResource Timeline.Row.Dark}" Foreground="{StaticResource Timeline.Row.Dark}">Dark</ComboBoxItem>
+                        <ComboBoxItem Tag="{StaticResource Timeline.Row.Blue}" Foreground="{StaticResource Timeline.Row.Blue}">Blue</ComboBoxItem>
+                        <ComboBoxItem Tag="{StaticResource Timeline.Row.Transparent}" Foreground="Black">Transparent</ComboBoxItem>
+                    </ComboBox>
+
+                    <TextBlock Margin="0,0,6,0" VerticalAlignment="Center" Text="Selected"  Foreground="White"/>
+                    <ComboBox Width="90" Foreground="{Binding ElementName=timeline, Path=SelectedTimelineRowBackground}"
+                              Margin="0,0,18,0"
+                              SelectedIndex="0"
+                              SelectedValuePath="Tag"
+                              SelectedValue="{Binding ElementName=timeline, Path=SelectedTimelineRowBackground, Mode=TwoWay}">
+                        <ComboBoxItem Tag="{StaticResource Timeline.Selected.Blue}" Foreground="{StaticResource Timeline.Selected.Blue}">Blue</ComboBoxItem>
+                        <ComboBoxItem Tag="{StaticResource Timeline.Selected.Green}" Foreground="{StaticResource Timeline.Selected.Green}">Green</ComboBoxItem>
+                        <ComboBoxItem Tag="{StaticResource Timeline.Selected.Orange}" Foreground="{StaticResource Timeline.Selected.Orange}">Orange</ComboBoxItem>
+                    </ComboBox>
+
+                    <TextBlock Margin="0,0,6,0" VerticalAlignment="Center" Text="Tick"  Foreground="White"/>
+                    <Slider Width="70"
+                            Minimum="0"
+                            Maximum="4"
+                            TickFrequency="0.5"
+                            IsSnapToTickEnabled="True"
+                            Value="{Binding ElementName=timeline, Path=TimeTickThickness, Mode=TwoWay}" />
+                    <TextBlock Width="28"
+                               Margin="6,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="{Binding ElementName=timeline, Path=TimeTickThickness, StringFormat={}{0:0.#}}"  Foreground="White"/>
+                </WrapPanel>
+            </Grid>
+
+            <opnx:OpnxPlaybackTimeline x:Name="timeline"
+                                       Grid.Row="1"
+                                       Margin="12,0,12,12"
+                                       MinHeight="200" />
+            
+        </Grid>
+
+    </Grid>
+</Window>

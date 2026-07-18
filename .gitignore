@@ -1,0 +1,28 @@
+﻿# Build outputs
+bin/
+obj/
+artifacts/
+
+# User and IDE files
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Local CLI/cache folders
+.dotnet/
+.nuget/
+
+# Logs
+*.log
+
+# Temporary and backup files
+*.tmp
+*.bak
+*.Backup
+
+# Local FFmpeg native runtimes
+**/FFMpeg/Lib/
+**/FFmpeg/Lib/

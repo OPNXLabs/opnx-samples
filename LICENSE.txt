@@ -1,0 +1,67 @@
+OPNX Samples License
+Learning, Evaluation, Research, Testing, and Non-Commercial Use
+
+Copyright (c) 2026 오픈엑스 (OPNX)
+
+This English version is the legally controlling version of this license. Any translation is provided for convenience only. If there is any conflict, this English version controls.
+
+Important Third-Party Notice
+
+This license applies only to OPNX-owned sample code and documentation in this repository. OPNX.Lib, OPNX.UI, FFmpeg, NuGet packages, native runtimes, and other third-party components remain subject to their own license terms. Publishing these samples does not grant any commercial, redistribution, patent, trademark, or other rights to those components.
+
+Acceptance
+
+By using, copying, or modifying the Software, you accept and agree to these terms. If you do not agree, you may not exercise the permissions granted by this license.
+
+1. Definitions
+
+"OPNX" means 오픈엑스 (OPNX), a business registered in the Republic of Korea and operating through https://www.opnx.kr/.
+
+"Software" means the OPNX-owned sample source code, documentation, and related materials provided with this license, excluding separately licensed dependencies and materials.
+
+"Commercial Use" means use of the Software, in whole or in part, for commercial advantage, monetary compensation, revenue generation, business operations, production environments, customer-facing services, paid services, commercial products, OEM delivery, bundling, embedding, redistribution, or another commercial purpose.
+
+2. License Grant
+
+Subject to these terms, OPNX grants you a limited, non-exclusive, non-transferable license to use, copy, modify, and study the Software solely for learning, evaluation, research, testing, and other non-commercial purposes.
+
+Internal evaluation by a commercial organization is permitted only for non-production evaluation, testing, proof of concept, and technical review. It does not permit production use, customer-facing use, revenue-generating use, redistribution, sublicensing, or inclusion in a commercial product or service.
+
+3. Commercial Use And Redistribution
+
+Commercial Use or redistribution of the Software, whether modified or unmodified, requires prior written permission from OPNX.
+
+Making this repository public on GitHub permits users to view and fork it through GitHub service functionality. That service-level permission does not authorize Commercial Use or redistribution outside the permissions of this license.
+
+4. Intellectual Property
+
+All rights, title, interest, and intellectual property rights in the OPNX-owned Software remain the exclusive property of OPNX. No patent license is granted. No right to use OPNX names, trademarks, logos, product names, project names, or branding is granted except for reasonable reference to the Software.
+
+5. Dependencies And Native Runtimes
+
+OPNX.Lib, OPNX.UI, FFmpeg, and all other dependencies are governed by their respective licenses and notices. FFmpeg native binaries are not licensed or distributed under this license. Anyone obtaining, bundling, redistributing, or deploying such binaries is responsible for the applicable license obligations of the selected build.
+
+See THIRD-PARTY-NOTICES.md for additional notices.
+
+6. No Warranty
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.
+
+7. Limitation Of Liability
+
+IN NO EVENT SHALL OPNX BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+8. Termination
+
+This license automatically terminates if you violate any term. Upon termination, you must stop using the Software and delete or destroy all copies in your possession or control, except where retention is required by applicable law.
+
+9. Severability And No Waiver
+
+If a provision is unenforceable, it will be limited or modified to the minimum extent necessary and the remaining provisions will continue in effect. Failure by OPNX to enforce a provision is not a waiver of later enforcement.
+
+10. Commercial Licensing And Contact
+
+For commercial licensing, OEM agreements, redistribution permission, or partnership inquiries:
+
+Website: https://www.opnx.kr/
+Email: opnx@opnx.kr
