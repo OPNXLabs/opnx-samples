@@ -2,9 +2,30 @@
 
 [English](README.md)
 
-> **라이선스 안내:** OPNX Samples는 오픈 소스 소프트웨어가 아닌 source-available 소프트웨어입니다. 상업적 사용과 재배포에는 OPNX의 사전 서면 허가가 필요합니다. 샘플 코드 공개는 OPNX.Lib 또는 OPNX.UI의 상업적 사용 권한을 부여하지 않습니다. 자세한 내용은 [LICENSE.txt](LICENSE.txt)를 확인하십시오.
+**OPNX.Lib와 OPNX.UI를 직접 평가할 수 있는 C# 실행 샘플입니다.**
 
-OPNX.Lib와 OPNX.UI를 사용하는 샘플 애플리케이션 모음입니다.
+RTSP MultiView · FFmpeg 디코딩 · WPF 영상 · 재생 타임라인 · TCP · EntityStore
+
+[RTSP 뷰어 실행](#rtsp-multi-live-viewer-실행) · [타임라인 실행](#playback-timeline-실행) · [OPNX.Lib](https://github.com/OPNXLabs/opnx-lib) · [OPNX.UI](https://github.com/OPNXLabs/opnx-ui) · [평가 및 OEM 문의](#상업-라이선스-및-oem-문의)
+
+![OPNX RTSP 멀티 라이브 뷰어](docs/images/rtsp-multi-live-viewer.png)
+
+## 시작할 샘플을 선택하세요
+
+| 샘플 | 확인할 수 있는 기능 | 요구사항 |
+| --- | --- | --- |
+| [`RtspMultiLiveViewer`](#rtsp-multi-live-viewer-실행) | RTSP 입력, FFmpeg 디코딩, WPF 영상 표시, 카메라 탐색 및 구성 가능한 MultiView | Windows, .NET 10, FFmpeg 네이티브 DLL, RTSP 소스 |
+| [`PlaybackTimeline`](#playback-timeline-실행) | 다채널 녹화 구간, 이벤트, 시간 탐색, 선택 및 타임라인 스타일 | Windows 및 .NET 10 |
+| [`TcpChat`](#tcp-chat-실행) | OPNX TCP 클라이언트/서버, 패킷 프레이밍, 연결 이벤트 및 텍스트 전달 | .NET 10 |
+| [`EntityStore`](#entitystore-실행) | 메모리 기반 엔티티 CRUD, 조회, 복사/업데이트 및 변경 알림 | .NET 10 |
+
+> **라이선스:** OPNX Samples는 오픈 소스가 아닌 source-available 소프트웨어입니다. [LICENSE.txt](LICENSE.txt)에 따라 학습, 연구, 테스트 및 비상업적 평가에 사용할 수 있습니다. 상업적 사용, 운영 환경 사용, 재배포 및 OEM 통합에는 OPNX의 사전 서면 허가가 필요합니다. 샘플은 OPNX.Lib 또는 OPNX.UI에 대한 추가 권리를 부여하지 않습니다.
+
+## 샘플에서 VMS/NVR까지
+
+샘플은 SDK와 UI의 개별 기능을 분리해 보여줍니다. OPNX.V는 같은 기반을 라이브 모니터링, 스케줄 녹화, 저장영상 검색, 동기 재생, 장치 관리, 권한, 로그, 이벤트 및 알람을 포함하는 개발 중인 VMS/NVR 애플리케이션으로 구성합니다.
+
+![OPNX.V 다채널 라이브 모니터링](docs/images/opnx-v-live-monitoring.png)
 
 ## 샘플
 
@@ -26,7 +47,6 @@ OPNX.V 서버, 저장소, 사용자, 권한, 장치 관리, 녹화 모델에는 
 - `OPNX.UI.WPF.Controls.OpnxMultiView`: 라이브뷰 타일 레이아웃, 선택 셀 배치, 셀 분할과 병합.
 - `OPNX.UI.WPF.Controls.OpnxTreeListView`: 카메라 목록 표시.
 
-![OPNX RTSP 멀티 라이브 뷰어](docs/images/rtsp-multi-live-viewer.png)
 - `OPNX.UI.WPF.Controls.OpnxTitlebar`: borderless WPF 창의 커스텀 타이틀바.
 - `OPNX.UI.WPF.Controls.OpnxButton`, `OpnxTextBox`, `OpnxPasswordBox`, `OpnxComboBox`, `OpnxNumericBox`: OPNX UI 리소스로 스타일링된 입력 및 명령 컨트롤.
 

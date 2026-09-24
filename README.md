@@ -2,9 +2,30 @@
 
 [Korean](README.ko.md)
 
-> **License notice:** OPNX Samples is source-available software, not open-source software. Commercial use and redistribution require prior written permission from OPNX. The sample code does not grant commercial rights to OPNX.Lib or OPNX.UI. See [LICENSE.txt](LICENSE.txt).
+**Runnable C# samples for evaluating OPNX.Lib and OPNX.UI.**
 
-Sample applications for OPNX.Lib and OPNX.UI.
+RTSP multi-view · FFmpeg decoding · WPF video · Playback timeline · TCP · EntityStore
+
+[Run the RTSP viewer](#run-rtsp-multi-live-viewer) · [Run the timeline](#run-playback-timeline) · [OPNX.Lib](https://github.com/OPNXLabs/opnx-lib) · [OPNX.UI](https://github.com/OPNXLabs/opnx-ui) · [Evaluation and OEM inquiries](#commercial-and-oem-inquiries)
+
+![OPNX RTSP Multi Live Viewer](docs/images/rtsp-multi-live-viewer.png)
+
+## Choose A Starting Point
+
+| Sample | What it demonstrates | Requirements |
+| --- | --- | --- |
+| [`RtspMultiLiveViewer`](#run-rtsp-multi-live-viewer) | RTSP input, FFmpeg decoding, WPF video presentation, camera navigation, and configurable MultiView | Windows, .NET 10, FFmpeg native DLLs, RTSP source |
+| [`PlaybackTimeline`](#run-playback-timeline) | Multi-channel recording ranges, events, time navigation, selection, and timeline styling | Windows and .NET 10 |
+| [`TcpChat`](#run-tcp-chat) | OPNX TCP client/server, packet framing, connection events, and text delivery | .NET 10 |
+| [`EntityStore`](#run-entity-store) | In-memory entity CRUD, lookup, copy/update, and change notifications | .NET 10 |
+
+> **License:** OPNX Samples is source-available, not open-source. Learning, research, testing, and non-commercial evaluation are permitted under [LICENSE.txt](LICENSE.txt). Commercial use, production use, redistribution, and OEM integration require prior written permission from OPNX. The samples do not grant additional rights to OPNX.Lib or OPNX.UI.
+
+## From Samples To A VMS/NVR
+
+The samples isolate individual SDK and UI capabilities. OPNX.V composes the same foundations into a VMS/NVR application under active development, including live monitoring, scheduled recording, recorded-video search, synchronized playback, device management, permissions, logs, events, and alarms.
+
+![OPNX.V multi-channel live monitoring](docs/images/opnx-v-live-monitoring.png)
 
 ## Samples
 
@@ -26,7 +47,6 @@ They do not depend on OPNX.V server, storage, user, permission, device-managemen
 - `OPNX.UI.WPF.Controls.OpnxMultiView`: live-view tile layout, selected-cell placement, split, and merge.
 - `OPNX.UI.WPF.Controls.OpnxTreeListView`: camera list presentation.
 
-![OPNX RTSP Multi Live Viewer](docs/images/rtsp-multi-live-viewer.png)
 - `OPNX.UI.WPF.Controls.OpnxTitlebar`: custom borderless WPF window title bar.
 - `OPNX.UI.WPF.Controls.OpnxButton`, `OpnxTextBox`, `OpnxPasswordBox`, `OpnxComboBox`, and `OpnxNumericBox`: common input and command controls styled with OPNX UI resources.
 
