@@ -22,6 +22,12 @@ The OPNX Samples license applies only to OPNX-owned sample code and documentatio
 
 Users must review the license and third-party notices distributed with each OPNX package. Publishing these samples does not expand the rights granted by those packages.
 
+## Version Scope
+
+The versions above match `Directory.Build.props` and the sample project references. Current Lib/UI repository sources have newer APIs, FFmpeg bindings, and WebRTC dependencies that are not automatically included in these pinned packages. Updating samples requires matching API migrations and native-runtime preparation, not just replacing the version strings.
+
+If upgraded to the current Lib SDK, preserve ASP.NET Core notices and distinguish the MIT DataChannelDotnet wrapper from native libdatachannel (MPL-2.0) and OpenSSL 3 (Apache-2.0). The notices delivered by the exact selected packages remain authoritative.
+
 ## FFmpeg Native Libraries
 
 Some samples can interoperate with FFmpeg native shared libraries through OPNX.Lib and FFmpeg.AutoGen.

@@ -1,4 +1,4 @@
-﻿# OPNX 샘플
+# OPNX 샘플
 
 [English](README.md)
 
@@ -20,6 +20,7 @@ RTSP MultiView · FFmpeg 디코딩 · WPF 영상 · 재생 타임라인 · TCP �
 | [`EntityStore`](#entitystore-실행) | 메모리 기반 엔티티 CRUD, 조회, 복사/업데이트 및 변경 알림 | .NET 10 |
 
 > **라이선스:** OPNX Samples는 오픈 소스가 아닌 source-available 소프트웨어입니다. [LICENSE.txt](LICENSE.txt)에 따라 학습, 연구, 테스트 및 비상업적 평가에 사용할 수 있습니다. 상업적 사용, 운영 환경 사용, 재배포 및 OEM 통합에는 OPNX의 사전 서면 허가가 필요합니다. 샘플은 OPNX.Lib 또는 OPNX.UI에 대한 추가 권리를 부여하지 않습니다.
+> 기업 내부의 비운영 평가·PoC·기술 검토도 허용됩니다. 상세 범위는 아래 평가 안내와 영문 라이선스를 확인하세요.
 
 ## 샘플에서 VMS/NVR까지
 
@@ -186,6 +187,32 @@ bin/x64/Debug/net10.0-windows/FFMpeg/Lib/x64/swresample-*.dll
 - `OPNX.UI.WPF`: `0.1.0-preview.20260716.1`
 
 패키지 버전은 [Directory.Build.props](Directory.Build.props)에서 중앙 관리합니다.
+
+## 평가와 코드 활용 범위
+
+- 개인 학습, 연구, 테스트와 비상업적 평가에 사용할 수 있습니다.
+- 기업 내부의 비운영 평가, PoC와 기술 검토도 라이선스에 따라 별도 서면 허가 없이 가능합니다.
+- 실제 운영, 고객 대상 서비스, 상용 제품·OEM 통합과 재배포에는 사전 서면 허가가 필요합니다.
+- 평가용 코드 수정 권한이 상용 제품에 코드를 포함하거나 수정본을 재배포할 권한까지 부여하지는 않습니다.
+- OPNX 소유 코드와 의존성의 라이선스는 각각 적용됩니다. 최종 조건은 저장소의 영문 라이선스를 확인하세요.
+
+## 최신 SDK와 샘플 버전
+
+이 저장소는 위에 명시된 공개 패키지 버전으로 실행하는 네 개의 샘플을 제공합니다. 최신 Lib·UI 소스의 모든 기능을 포함하지 않습니다.
+
+| 현재 SDK 소스의 기능 | 이 샘플 저장소 |
+| --- | --- |
+| RTSP 입력·디코딩·MultiView | `RtspMultiLiveViewer` |
+| 다채널 재생 타임라인 | `PlaybackTimeline` |
+| TCP 메시지 송수신 | `TcpChat` |
+| 메모리 EntityStore CRUD | 고정 패키지 API를 사용하는 `EntityStore` |
+| WebRTC 미디어 송출·Kestrel 시그널링 | 전용 실행 샘플 없음 |
+| TCP 파일 전송·SharedMemory 원본 버퍼 | 전용 실행 샘플 없음 |
+| Remux·자막·알림·트레이·시간 입력 | 전용 실행 샘플 없음 |
+
+EntityStore 샘플의 `NewEntity`, `OldEntity`, `PropertyName`, `Value`는 고정된 이전 패키지 API입니다. 최신 Lib는 `EntityType`, `EntityID`, `OriginalValues`, `CurrentValues`, `ChangedProperties`를 제공하고 `FindCurrent<TEntity, TKey>`로 현재 엔티티를 조회합니다. 패키지를 갱신할 때는 이벤트 처리와 조회 API를 함께 마이그레이션해야 합니다.
+
+네이티브 FFmpeg도 선택한 패키지의 FFmpeg.AutoGen 버전에 맞춰 준비합니다. 최신 Lib·UI 소스의 `9.0.1.1` 바인딩 요구사항을 이전 패키지에 그대로 적용하지 않습니다. 최신 WebRTC를 포함한 통합 SDK로 갱신하면 ASP.NET Core 공유 프레임워크와 DataChannelDotnet 네이티브 자산 요구사항도 함께 확인해야 합니다.
 
 ## 라이선스
 

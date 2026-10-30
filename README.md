@@ -1,4 +1,4 @@
-﻿# OPNX Samples
+# OPNX Samples
 
 [Korean](README.ko.md)
 
@@ -17,9 +17,10 @@ RTSP multi-view · FFmpeg decoding · WPF video · Playback timeline · TCP · E
 | [`RtspMultiLiveViewer`](#run-rtsp-multi-live-viewer) | RTSP input, FFmpeg decoding, WPF video presentation, camera navigation, and configurable MultiView | Windows, .NET 10, FFmpeg native DLLs, RTSP source |
 | [`PlaybackTimeline`](#run-playback-timeline) | Multi-channel recording ranges, events, time navigation, selection, and timeline styling | Windows and .NET 10 |
 | [`TcpChat`](#run-tcp-chat) | OPNX TCP client/server, packet framing, connection events, and text delivery | .NET 10 |
-| [`EntityStore`](#run-entity-store) | In-memory entity CRUD, lookup, copy/update, and change notifications | .NET 10 |
+| [`EntityStore`](#run-entitystore) | In-memory entity CRUD, lookup, copy/update, and change notifications | .NET 10 |
 
 > **License:** OPNX Samples is source-available, not open-source. Learning, research, testing, and non-commercial evaluation are permitted under [LICENSE.txt](LICENSE.txt). Commercial use, production use, redistribution, and OEM integration require prior written permission from OPNX. The samples do not grant additional rights to OPNX.Lib or OPNX.UI.
+> Internal non-production evaluation, proof of concept, and technical review by commercial organizations are also permitted. See the evaluation guidance below and the English license for scope.
 
 ## From Samples To A VMS/NVR
 
@@ -186,6 +187,32 @@ All samples consume the published NuGet packages rather than local OPNX source p
 - `OPNX.UI.WPF`: `0.1.0-preview.20260716.1`
 
 Package versions are managed centrally in [Directory.Build.props](Directory.Build.props).
+
+## Evaluation And Code Reuse
+
+- Personal learning, research, testing, and non-commercial evaluation are permitted.
+- Internal non-production evaluation, proof of concept, and technical review by a commercial organization are also permitted under the license without separate written permission.
+- Production use, customer-facing services, commercial/OEM integration, and redistribution require prior written permission.
+- Permission to modify evaluation code does not grant permission to include it in a commercial product or redistribute modified copies.
+- OPNX-owned code and dependencies have separate licenses. The repository's English license controls the final terms.
+
+## Current SDK And Sample Versions
+
+This repository provides four runnable samples using the published package versions listed above. It does not demonstrate every feature in current Lib/UI source.
+
+| Current SDK source capability | This sample repository |
+| --- | --- |
+| RTSP input, decoding, and MultiView | `RtspMultiLiveViewer` |
+| Multi-channel playback timeline | `PlaybackTimeline` |
+| TCP messaging | `TcpChat` |
+| In-memory EntityStore CRUD | `EntityStore` using the pinned package API |
+| WebRTC media and Kestrel signaling | No dedicated runnable sample |
+| TCP file transfer and SharedMemory raw buffers | No dedicated runnable sample |
+| Remux, subtitles, notifications, tray, and time input | No dedicated runnable sample |
+
+The EntityStore sample uses the pinned older package's `NewEntity`, `OldEntity`, `PropertyName`, and `Value` event API. Current Lib exposes `EntityType`, `EntityID`, `OriginalValues`, `CurrentValues`, and `ChangedProperties`, with `FindCurrent<TEntity, TKey>` for current entity lookup. Updating packages requires migrating event handling and query APIs together.
+
+Obtain native FFmpeg libraries compatible with the selected package's FFmpeg.AutoGen version. Do not apply the current Lib/UI source binding requirement of `9.0.1.1` to older packages automatically. Updating to the current aggregate SDK with WebRTC also requires checking the ASP.NET Core shared framework and DataChannelDotnet native assets.
 
 ## License
 
