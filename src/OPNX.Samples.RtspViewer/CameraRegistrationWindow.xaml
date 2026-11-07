@@ -1,0 +1,25 @@
+<Window x:Class="OPNX.Samples.RtspViewer.CameraRegistrationWindow"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:opnx="clr-namespace:OPNX.UI.WPF.Controls;assembly=OPNX.UI.WPF" x:Name="cameraRegistrationWindow"
+ Title="Add Camera" Width="480" Height="470" WindowStartupLocation="CenterOwner" WindowStyle="None" ResizeMode="NoResize"
+ FontFamily="Segoe UI" FontSize="13" Background="{DynamicResource Common.Brush.Background}" Foreground="{DynamicResource Common.Brush.Foreground}"
+ KeyUp="CameraRegistrationWindow_KeyUp">
+ <Grid><Grid.RowDefinitions><RowDefinition Height="44"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+  <opnx:OpnxTitlebar Background="{DynamicResource Common.Brush.Panel.Background}" ButtonForeground="{DynamicResource Common.Brush.Foreground}"
+   ShowMaximizeButton="False" ShowMinimizeButton="False" TitleContentMargin="24,0,0,0" TitleContent="Add RTSP camera"/>
+  <StackPanel Grid.Row="1" Margin="28,22">
+   <TextBlock Text="Connect a video source" FontSize="21" FontWeight="SemiBold" Margin="0,0,0,5"/>
+   <TextBlock Text="Credentials are kept in this session only." Style="{StaticResource Caption}"/>
+   <TextBlock Text="Name" Margin="0,0,0,5"/><opnx:OpnxTextBox PlaceholderText="Lobby camera" Text="{Binding ElementName=cameraRegistrationWindow, Path=CameraName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,12"/>
+   <TextBlock Text="RTSP URL" Margin="0,0,0,5"/><opnx:OpnxTextBox PlaceholderText="rtsp://host:554/stream" Text="{Binding ElementName=cameraRegistrationWindow, Path=RtspUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,12"/>
+   <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+    <StackPanel><TextBlock Text="Account" Margin="0,0,0,5"/><opnx:OpnxTextBox PlaceholderText="Optional" Text="{Binding ElementName=cameraRegistrationWindow, Path=CameraAccount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/></StackPanel>
+    <StackPanel Grid.Column="2"><TextBlock Text="Password" Margin="0,0,0,5"/><opnx:OpnxPasswordBox PlaceholderText="Optional" Password="{Binding ElementName=cameraRegistrationWindow, Path=CameraPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/></StackPanel>
+   </Grid>
+   <Grid Margin="0,24,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+    <opnx:OpnxButton Content="Cancel" Click="CancelButton_Click"/>
+    <opnx:OpnxButton Grid.Column="2" Content="Add camera" Style="{StaticResource PrimaryButton}" Click="OkButton_Click"/>
+   </Grid>
+  </StackPanel>
+ </Grid>
+</Window>

@@ -14,4 +14,8 @@
     <PackageReference Include="OPNX.UI.WPF" Version="$(OpnxUiWpfVersion)" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="..\Shared\Themes\SampleTheme.cs" Link="SampleTheme.cs" />
+    <Page Include="..\Shared\Themes\Controls.xaml" Link="Themes\Controls.xaml" />
+  </ItemGroup>
 </Project>

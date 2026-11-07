@@ -1,0 +1,145 @@
+<Window x:Class="OPNX.Samples.SystemMonitoring.MainWindow"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:opnx="clr-namespace:OPNX.UI.WPF.Controls;assembly=OPNX.UI.WPF"
+ Title="OPNX System Monitoring" Width="1240" Height="860" MinWidth="1080" MinHeight="720"
+ WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="CanResizeWithGrip"
+ FontFamily="Segoe UI" FontSize="13"
+ Background="{DynamicResource Common.Brush.Background}" Foreground="{DynamicResource Common.Brush.Foreground}"
+ Loaded="Window_Loaded" Closing="Window_Closing">
+ <Window.Resources>
+  <BooleanToVisibilityConverter x:Key="VisibleIfTrue"/>
+  <Style x:Key="MetricCard" TargetType="Border" BasedOn="{StaticResource Card}">
+   <Setter Property="Width" Value="Auto"/><Setter Property="Height" Value="218"/><Setter Property="Margin" Value="0,0,12,0"/>
+  </Style>
+  <Style x:Key="Table" TargetType="{x:Type opnx:OpnxTreeListView}" BasedOn="{StaticResource GalleryTree}">
+   <Setter Property="ViewMode" Value="Flat"/><Setter Property="AutoGenerateColumns" Value="False"/>
+   <Setter Property="IsReadOnly" Value="True"/><Setter Property="CanUserAddRows" Value="False"/>
+   <Setter Property="HeadersVisibility" Value="Column"/><Setter Property="GridLinesVisibility" Value="None"/>
+   <Setter Property="RowHeight" Value="36"/><Setter Property="RowSpacing" Value="2"/>
+  </Style>
+ </Window.Resources>
+ <Grid>
+  <Grid.RowDefinitions><RowDefinition Height="48"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="44"/></Grid.RowDefinitions>
+  <opnx:OpnxTitlebar Background="{DynamicResource Common.Brush.Panel.Background}" ButtonForeground="{DynamicResource Common.Brush.Foreground}"
+   ButtonSize="30" ButtonMargin="4,0,0,0" ControlBoxMargin="0,0,16,0">
+   <opnx:OpnxTitlebar.TitleContent><StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="24,0,0,0">
+    <Border Width="9" Height="9" CornerRadius="2" Background="{DynamicResource Common.Brush.Accent}" Margin="0,0,12,0"/>
+    <TextBlock Text="OPNX" FontSize="16" FontWeight="Bold"/><TextBlock Text=" /  SYSTEM MONITORING" Foreground="{DynamicResource Common.Brush.Muted}" FontSize="12" VerticalAlignment="Center"/>
+   </StackPanel></opnx:OpnxTitlebar.TitleContent>
+  </opnx:OpnxTitlebar>
+  <Grid Grid.Row="1" Margin="24,20,24,16">
+   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+   <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+    <StackPanel><TextBlock Text="Your system, live." FontSize="26" FontWeight="SemiBold"/>
+     <TextBlock Text="{Binding MachineText}" Foreground="{DynamicResource Common.Brush.Muted}" FontSize="12" Margin="0,6,0,0" TextTrimming="CharacterEllipsis"/>
+    </StackPanel>
+    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+     <opnx:OpnxComboBox x:Name="ThemeBox" Width="155" Margin="0,0,10,0" SelectionChanged="Theme_Changed" ToolTip="Theme"/>
+     <opnx:OpnxComboBox x:Name="AccentBox" Width="100" SelectionChanged="Theme_Changed" ToolTip="Accent color"/>
+    </StackPanel>
+   </Grid>
+   <WrapPanel Grid.Row="1" Margin="0,18,0,0" VerticalAlignment="Center">
+    <TextBlock Text="Collect every" VerticalAlignment="Center" Margin="0,0,10,0"/>
+    <opnx:OpnxNumericBox x:Name="IntervalBox" Value="2" Minimum="1" Maximum="60" Width="76" ValueChanged="Interval_Changed"/>
+    <TextBlock Text="seconds" VerticalAlignment="Center" Margin="10,0,20,0"/>
+    <opnx:OpnxButton x:Name="StartButton" Content="Start collecting" Style="{StaticResource PrimaryButton}" Click="Start_Click" Margin="0,0,10,0"/>
+    <opnx:OpnxButton x:Name="StopButton" Content="Stop" Click="Stop_Click" Margin="0,0,18,0" IsEnabled="False"/>
+    <TextBlock Text="Local computer · interval changes restart the counters" Foreground="{DynamicResource Common.Brush.Muted}" VerticalAlignment="Center" FontSize="12"/>
+   </WrapPanel>
+   <TextBlock Grid.Row="2" Text="{Binding ErrorText}" Foreground="{DynamicResource Common.Brush.Status.Error}" TextWrapping="Wrap" Margin="0,8,0,0"/>
+  </Grid>
+  <UniformGrid Grid.Row="2" Columns="4" Rows="1" Margin="24,0,12,20">
+   <Border Style="{StaticResource MetricCard}"><Grid>
+    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="100"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+    <TextBlock Text="CPU" FontSize="16" FontWeight="SemiBold"/>
+    <Grid Grid.Row="1" Margin="0,8,0,8">
+     <opnx:OpnxRadialProgressBar Value="{Binding CpuUsage, Mode=OneWay}" Width="90" Height="90" Visibility="{Binding RatesReady, Converter={StaticResource VisibleIfTrue}}"/>
+     <TextBlock Text="{Binding CpuText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="SemiBold"/>
+    </Grid>
+    <TextBlock Grid.Row="2" Text="{Binding CpuDetail}" Foreground="{DynamicResource Common.Brush.Muted}" TextWrapping="Wrap" FontSize="11" Margin="0,8,0,0"/>
+   </Grid></Border>
+   <Border Style="{StaticResource MetricCard}"><Grid>
+    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="100"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+    <TextBlock Text="Memory" FontSize="16" FontWeight="SemiBold"/>
+    <Grid Grid.Row="1" Margin="0,8,0,8">
+     <opnx:OpnxRadialProgressBar Value="{Binding MemoryUsage, Mode=OneWay}" Width="90" Height="90" Visibility="{Binding MemoryAvailable, Converter={StaticResource VisibleIfTrue}}"/>
+     <TextBlock Text="{Binding MemoryText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="SemiBold"/>
+    </Grid>
+    <TextBlock Grid.Row="2" Text="{Binding MemoryDetail}" Foreground="{DynamicResource Common.Brush.Muted}" TextWrapping="Wrap" FontSize="11" Margin="0,8,0,0"/>
+   </Grid></Border>
+   <Border Style="{StaticResource MetricCard}"><Grid>
+    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="100"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+    <TextBlock Text="This process" FontSize="16" FontWeight="SemiBold"/>
+    <Grid Grid.Row="1" Margin="0,8,0,8">
+     <opnx:OpnxRadialProgressBar Value="{Binding ProcessUsage, Mode=OneWay}" Width="90" Height="90" Visibility="{Binding RatesReady, Converter={StaticResource VisibleIfTrue}}"/>
+     <TextBlock Text="{Binding ProcessText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="SemiBold"/>
+    </Grid>
+    <TextBlock Grid.Row="2" Text="{Binding ProcessDetail}" Foreground="{DynamicResource Common.Brush.Muted}" TextWrapping="Wrap" FontSize="11" Margin="0,8,0,0"/>
+   </Grid></Border>
+   <Border Style="{StaticResource MetricCard}"><Grid>
+    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="100"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+    <TextBlock Text="GPU" FontSize="16" FontWeight="SemiBold"/>
+    <Grid Grid.Row="1" Margin="0,8,0,8">
+     <opnx:OpnxRadialProgressBar Value="{Binding GpuUsage, Mode=OneWay}" Width="90" Height="90" Visibility="{Binding GpuAvailable, Converter={StaticResource VisibleIfTrue}}"/>
+     <TextBlock Text="{Binding GpuText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="SemiBold"/>
+    </Grid>
+    <TextBlock Grid.Row="2" Text="{Binding GpuDetail}" Foreground="{DynamicResource Common.Brush.Muted}" TextWrapping="Wrap" FontSize="11" Margin="0,8,0,0"/>
+   </Grid></Border>
+  </UniformGrid>
+  <Border Grid.Row="3" Background="{DynamicResource Common.Brush.Panel.Background}" CornerRadius="10" BorderBrush="{DynamicResource Common.Brush.Border}" BorderThickness="1" Margin="24,0,24,20" Padding="16">
+   <opnx:OpnxTabControl>
+    <opnx:OpnxTabItem Header="Network"><Grid>
+     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+     <Grid Margin="0,0,0,12"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <TextBlock Text="{Binding NetworkSummary}" Foreground="{DynamicResource Common.Brush.Muted}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+      <opnx:OpnxCheckBox Grid.Column="1" Content="Active interfaces only" IsChecked="{Binding ActiveOnly}" Margin="12,0,0,0"/>
+     </Grid>
+     <opnx:OpnxTreeListView Grid.Row="1" ItemsSource="{Binding Networks}" Style="{StaticResource Table}">
+      <opnx:OpnxTreeListView.Columns>
+       <opnx:OpnxTreeListViewTextColumn Header="Interface" FieldName="Name" Binding="{Binding Name}" Width="1.3*"/>
+       <opnx:OpnxTreeListViewTextColumn Header="Receive" FieldName="Value" Binding="{Binding Value}" Width="0.9*"/>
+       <opnx:OpnxTreeListViewTextColumn Header="Send" FieldName="Detail" Binding="{Binding Detail}" Width="1.4*"/>
+       <opnx:OpnxTreeListViewTextColumn Header="State / link" FieldName="State" Binding="{Binding State}" Width="1.8*"/>
+      </opnx:OpnxTreeListView.Columns>
+     </opnx:OpnxTreeListView>
+    </Grid></opnx:OpnxTabItem>
+    <opnx:OpnxTabItem Header="Disks"><Grid>
+     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+     <Grid Margin="0,0,0,12"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <TextBlock Text="{Binding DiskSummary}" Foreground="{DynamicResource Common.Brush.Muted}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+     </Grid>
+     <opnx:OpnxTreeListView Grid.Row="1" ItemsSource="{Binding Disks}" Style="{StaticResource Table}">
+      <opnx:OpnxTreeListView.Columns>
+       <opnx:OpnxTreeListViewTextColumn Header="Volume" FieldName="Name" Binding="{Binding Name}" Width="1.3*"/>
+       <opnx:OpnxTreeListViewTextColumn Header="Usage" FieldName="Value" Binding="{Binding Value}" Width="0.9*"/>
+       <opnx:OpnxTreeListViewTextColumn Header="Used / total" FieldName="Detail" Binding="{Binding Detail}" Width="1.4*"/>
+       <opnx:OpnxTreeListViewTextColumn Header="Free / file system" FieldName="State" Binding="{Binding State}" Width="1.8*"/>
+      </opnx:OpnxTreeListView.Columns>
+     </opnx:OpnxTreeListView>
+    </Grid></opnx:OpnxTabItem>
+    <opnx:OpnxTabItem Header="GPUs"><Grid>
+     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+     <Grid Margin="0,0,0,12"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <TextBlock Text="{Binding GpuSummary}" Foreground="{DynamicResource Common.Brush.Muted}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+     </Grid>
+     <opnx:OpnxTreeListView Grid.Row="1" ItemsSource="{Binding Gpus}" Style="{StaticResource Table}">
+      <opnx:OpnxTreeListView.Columns>
+       <opnx:OpnxTreeListViewTextColumn Header="Adapter" FieldName="Name" Binding="{Binding Name}" Width="1.3*"/>
+       <opnx:OpnxTreeListViewTextColumn Header="Usage" FieldName="Value" Binding="{Binding Value}" Width="0.9*"/>
+       <opnx:OpnxTreeListViewTextColumn Header="Dedicated memory" FieldName="Detail" Binding="{Binding Detail}" Width="1.4*"/>
+       <opnx:OpnxTreeListViewTextColumn Header="Temperature / power" FieldName="State" Binding="{Binding State}" Width="1.8*"/>
+      </opnx:OpnxTreeListView.Columns>
+     </opnx:OpnxTreeListView>
+    </Grid></opnx:OpnxTabItem>
+   </opnx:OpnxTabControl>
+  </Border>
+  <Border Grid.Row="4" Background="{DynamicResource Common.Brush.Panel.Background}" BorderBrush="{DynamicResource Common.Brush.Border}" BorderThickness="0,1,0,0" Padding="24,0">
+   <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+    <opnx:OpnxRadialProgressBar Width="16" Height="16" IndicatorThickness="2" IsIndeterminate="True" Visibility="{Binding IsRunning, Converter={StaticResource VisibleIfTrue}}" Margin="0,0,10,0"/>
+    <TextBlock Grid.Column="1" Text="{Binding StatusText}" Foreground="{DynamicResource Common.Brush.Muted}" VerticalAlignment="Center"/>
+    <TextBlock Grid.Column="2" Text="{Binding LastUpdateText}" Foreground="{DynamicResource Common.Brush.Muted}" FontSize="11" VerticalAlignment="Center"/>
+   </Grid>
+  </Border>
+ </Grid>
+</Window>

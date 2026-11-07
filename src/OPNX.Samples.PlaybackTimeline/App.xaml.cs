@@ -1,14 +1,10 @@
-﻿using System.Configuration;
-using System.Data;
 using System.Windows;
-
-namespace OPNX.Samples.PlaybackTimeline
+namespace OPNX.Samples.PlaybackTimeline;
+public partial class App : Application
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    protected override void OnStartup(StartupEventArgs e)
     {
+        SampleTheme.Apply("OPNX.V Dark", "Blue");
+        base.OnStartup(e);
     }
-
 }

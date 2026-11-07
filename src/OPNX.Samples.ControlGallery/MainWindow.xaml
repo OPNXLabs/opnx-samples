@@ -1,0 +1,170 @@
+<Window x:Class="OPNX.Samples.ControlGallery.MainWindow"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:local="clr-namespace:OPNX.Samples.ControlGallery"
+ xmlns:opnx="clr-namespace:OPNX.UI.WPF.Controls;assembly=OPNX.UI.WPF"
+ Title="OPNX Control Gallery" Width="1240" Height="920" MinWidth="1120" MinHeight="680"
+ WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="CanResizeWithGrip"
+ Background="{DynamicResource Common.Brush.Background}" Foreground="{DynamicResource Common.Brush.Foreground}"
+ FontFamily="Segoe UI" FontSize="13" Loaded="Window_Loaded">
+ <Grid>
+  <Grid.RowDefinitions><RowDefinition Height="48"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="38"/></Grid.RowDefinitions>
+  <opnx:OpnxTitlebar Background="{DynamicResource Common.Brush.Panel.Background}" ButtonForeground="{DynamicResource Common.Brush.Foreground}"
+   ButtonSize="30" ButtonMargin="4,0,0,0" ControlBoxMargin="0,0,16,0">
+   <opnx:OpnxTitlebar.TitleContent>
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="22,0,0,0">
+     <Border Width="9" Height="9" CornerRadius="2" Background="{DynamicResource Common.Brush.Accent}" Margin="0,0,12,0"/>
+     <TextBlock Text="OPNX" FontWeight="Bold" FontSize="16" VerticalAlignment="Center"/>
+     <TextBlock Text=" /  CONTROL GALLERY" Foreground="{DynamicResource Common.Brush.Muted}" VerticalAlignment="Center" FontSize="12"/>
+    </StackPanel>
+   </opnx:OpnxTitlebar.TitleContent>
+  </opnx:OpnxTitlebar>
+  <Grid Grid.Row="1" Margin="24,20,24,20">
+   <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+   <StackPanel><TextBlock Text="One library. Every interaction." FontSize="25" FontWeight="SemiBold"/>
+    <TextBlock Text="Edit, select, navigate — change the palette without restarting." Foreground="{DynamicResource Common.Brush.Muted}" Margin="0,6,0,0"/>
+   </StackPanel>
+   <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+    <StackPanel Margin="0,0,12,0"><TextBlock Text="THEME" FontSize="10" Foreground="{DynamicResource Common.Brush.Muted}" Margin="0,0,0,5"/>
+     <opnx:OpnxComboBox x:Name="ThemeBox" Width="158" SelectionChanged="Theme_Changed"/></StackPanel>
+    <StackPanel Margin="0,0,12,0"><TextBlock Text="ACCENT" FontSize="10" Foreground="{DynamicResource Common.Brush.Muted}" Margin="0,0,0,5"/>
+     <opnx:OpnxComboBox x:Name="AccentBox" Width="110" SelectionChanged="Theme_Changed"/></StackPanel>
+    <opnx:OpnxButton Content="Reset theme" Click="ResetTheme_Click" VerticalAlignment="Bottom"/>
+   </StackPanel>
+  </Grid>
+  <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="24,0,8,0">
+   <WrapPanel x:Name="GalleryPanel">
+    <Border Style="{StaticResource Card}"><StackPanel>
+     <TextBlock Text="01 / Text &amp; values" Style="{StaticResource CardTitle}"/>
+     <TextBlock Text="TextBox · PasswordBox · NumericBox · IpTextBox" Style="{StaticResource Caption}"/>
+     <TextBlock Text="Name" Margin="0,0,0,5"/><opnx:OpnxTextBox Text="Lobby camera" PlaceholderText="Device name" Margin="0,0,0,12"/>
+     <TextBlock Text="Sample password (not saved)" Margin="0,0,0,5"/><opnx:OpnxPasswordBox PlaceholderText="Type a demo value" Margin="0,0,0,12"/>
+     <Grid Margin="0,0,0,12"><Grid.ColumnDefinitions><ColumnDefinition Width="100"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+      <StackPanel><TextBlock Text="Channels" Margin="0,0,0,5"/><opnx:OpnxNumericBox Value="16" Minimum="1" Maximum="64"/></StackPanel>
+      <StackPanel Grid.Column="2"><TextBlock Text="IPv4 address" Margin="0,0,0,5"/><opnx:OpnxIpTextBox Address="192.168.1.10"/></StackPanel>
+     </Grid>
+     <TextBlock Text="Port validation · enter 1–65535" Margin="0,0,0,5"/>
+     <opnx:OpnxTextBox x:Name="PortBox" Style="{StaticResource ValidatedText}">
+      <opnx:OpnxTextBox.Text><Binding Path="PortText" UpdateSourceTrigger="PropertyChanged"><Binding.ValidationRules><local:PortValidationRule ValidatesOnTargetUpdated="True"/></Binding.ValidationRules></Binding></opnx:OpnxTextBox.Text>
+     </opnx:OpnxTextBox>
+     <TextBlock FontSize="11" TextWrapping="Wrap" Margin="0,6,0,12">
+      <TextBlock.Style><Style TargetType="TextBlock">
+       <Setter Property="Text" Value="Port accepted."/><Setter Property="Foreground" Value="{DynamicResource Common.Brush.Status.Connected}"/>
+       <Style.Triggers><DataTrigger Binding="{Binding ElementName=PortBox, Path=(Validation.HasError)}" Value="True">
+        <Setter Property="Text" Value="Enter a port between 1 and 65535."/><Setter Property="Foreground" Value="{DynamicResource Common.Brush.Status.Error}"/>
+       </DataTrigger></Style.Triggers>
+      </Style></TextBlock.Style>
+     </TextBlock>
+     <opnx:OpnxTextBox Text="Disabled input" IsEnabled="False" Opacity="0.4"/>
+    </StackPanel></Border>
+    <Border Style="{StaticResource Card}"><StackPanel>
+     <TextBlock Text="02 / Selection" Style="{StaticResource CardTitle}"/>
+     <TextBlock Text="ComboBox · CheckBox · RadioButton · ToggleButton" Style="{StaticResource Caption}"/>
+     <opnx:OpnxComboBox SelectedIndex="0" Margin="0,0,0,14"><ComboBoxItem Content="Main stream · H.264"/><ComboBoxItem Content="Sub stream · H.265"/><ComboBoxItem Content="Audio only"/></opnx:OpnxComboBox>
+     <opnx:OpnxCheckBox Content="Enable notifications" IsChecked="True"/>
+     <opnx:OpnxCheckBox Content="Record motion events"/>
+     <opnx:OpnxCheckBox Content="Unavailable option" IsEnabled="False" Opacity="0.4"/>
+     <WrapPanel Margin="0,12,0,12"><opnx:OpnxRadioButton Content="TCP" GroupName="Transport" IsChecked="True"/><opnx:OpnxRadioButton Content="UDP" GroupName="Transport"/></WrapPanel>
+     <WrapPanel><opnx:OpnxToggleButton Content="Live" IsChecked="True" Margin="0,0,8,8"/><opnx:OpnxToggleButton Content="Playback" Margin="0,0,8,8"/><opnx:OpnxToggleButton Content="Disabled" IsEnabled="False"/></WrapPanel>
+     <TextBlock Text="Try selected, hover, pressed and disabled states." Style="{StaticResource Caption}" Margin="0,16,0,0"/>
+    </StackPanel></Border>
+    <Border Style="{StaticResource Card}"><StackPanel>
+     <TextBlock Text="03 / Dates &amp; time" Style="{StaticResource CardTitle}"/>
+     <TextBlock Text="DatePicker · TimePicker · DateRangeSelector · StepSelector" Style="{StaticResource Caption}"/>
+     <Grid Margin="0,0,0,16"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+      <opnx:OpnxDatePicker x:Name="DatePicker" DisplayFormat="yyyy-MM-dd"/>
+      <opnx:OpnxTimePicker Grid.Column="2" SelectedTime="08:30:00"/>
+     </Grid>
+     <TextBlock Text="Date range" Margin="0,0,0,8"/><opnx:OpnxDateRangeSelector x:Name="DateRange"/>
+     <TextBlock Text="Range choices and custom date fields are interactive." Style="{StaticResource Caption}" Margin="0,10,0,12"/>
+     <TextBlock Text="Step selector" Margin="0,0,0,5"/><opnx:OpnxStepSelector x:Name="Steps"/>
+    </StackPanel></Border>
+    <Border Style="{StaticResource Card}"><StackPanel>
+     <TextBlock Text="04 / Commands" Style="{StaticResource CardTitle}"/>
+     <TextBlock Text="Button · RoundRectButton · ArcButton" Style="{StaticResource Caption}"/>
+     <WrapPanel><opnx:OpnxButton Content="Primary action" Style="{StaticResource PrimaryButton}" Click="Action_Click" Margin="0,0,8,10"/>
+      <opnx:OpnxButton Content="Secondary" Click="Action_Click" Margin="0,0,0,10"/></WrapPanel>
+     <WrapPanel><opnx:OpnxButton Content="Disabled" IsEnabled="False" Margin="0,0,8,10"/>
+      <opnx:OpnxButton Content="Delete sample" Foreground="{DynamicResource Common.Brush.Status.Error}" Click="Action_Click" Margin="0,0,0,10"/></WrapPanel>
+     <TextBlock Text="Custom geometry" Foreground="{DynamicResource Common.Brush.Muted}" Margin="0,12,0,12"/>
+     <WrapPanel VerticalAlignment="Center"><opnx:OpnxRoundRectButton Style="{StaticResource RoundButton}" Content="Rounded" Click="Action_Click" Margin="0,12,24,0"/>
+      <opnx:OpnxArcButton Style="{StaticResource ArcButton}" Content="Arc" Click="Action_Click"/></WrapPanel>
+     <TextBlock Text="Actions only update the activity line; no data is deleted." Style="{StaticResource Caption}" Margin="0,16,0,0"/>
+    </StackPanel></Border>
+    <Border Style="{StaticResource Card}"><StackPanel>
+     <TextBlock Text="05 / Navigation" Style="{StaticResource CardTitle}"/>
+     <TextBlock Text="Navigator · NavigatorItem · TabControl · TabItem" Style="{StaticResource Caption}"/>
+     <opnx:OpnxNavigator Orientation="Horizontal" SelectedIndex="0" Margin="0,0,0,18" NavigationChanged="Navigation_Changed">
+      <opnx:OpnxNavigatorItem Content="Live"/><opnx:OpnxNavigatorItem Content="Events" IsBadgeVisible="True"/><opnx:OpnxNavigatorItem Content="Setup"/>
+     </opnx:OpnxNavigator>
+     <opnx:OpnxTabControl Height="148">
+      <opnx:OpnxTabItem Header="Overview"><TextBlock Text="Reusable navigation for monitoring and management screens." TextWrapping="Wrap" VerticalAlignment="Center"/></opnx:OpnxTabItem>
+      <opnx:OpnxTabItem Header="Details"><TextBlock Text="Selection, badges and tab states follow the current palette." TextWrapping="Wrap"/></opnx:OpnxTabItem>
+      <opnx:OpnxTabItem Header="Disabled" IsEnabled="False"/>
+     </opnx:OpnxTabControl>
+    </StackPanel></Border>
+    <Border Style="{StaticResource Card}"><StackPanel>
+     <TextBlock Text="06 / Progress &amp; status" Style="{StaticResource CardTitle}"/>
+     <TextBlock Text="RadialProgressBar · determinate and indeterminate" Style="{StaticResource Caption}"/>
+     <Grid Margin="12,4,12,18"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+      <Grid><opnx:OpnxRadialProgressBar x:Name="ProgressRing" Width="90" Height="90" Value="65"/><TextBlock Text="{Binding ElementName=ProgressRing, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="19"/></Grid>
+      <opnx:OpnxRadialProgressBar Grid.Column="1" Width="90" Height="90" IsIndeterminate="True"/>
+     </Grid>
+     <Slider Minimum="0" Maximum="100" Value="{Binding ElementName=ProgressRing, Path=Value, Mode=TwoWay}" Margin="0,0,0,16"/>
+     <WrapPanel><TextBlock Text="● Connected" Foreground="{DynamicResource Common.Brush.Status.Connected}" Margin="0,0,20,0"/><TextBlock Text="● Attention" Foreground="{DynamicResource Common.Brush.Status.Error}"/></WrapPanel>
+    </StackPanel></Border>
+    <Border Style="{StaticResource Card}" Width="748"><StackPanel>
+     <TextBlock Text="07 / Data &amp; paging" Style="{StaticResource CardTitle}"/>
+     <TextBlock Text="TreeListView · flat / tree modes · search · PagingControl" Style="{StaticResource Caption}"/>
+     <Grid Margin="0,0,0,12"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <opnx:OpnxTextBox x:Name="SearchBox" PlaceholderText="Search device names or status" TextChanged="Search_Changed" Margin="0,0,16,0"/>
+      <opnx:OpnxCheckBox x:Name="TreeMode" Grid.Column="1" Content="Tree mode" Checked="DataMode_Changed" Unchecked="DataMode_Changed"/>
+     </Grid>
+     <opnx:OpnxTreeListView x:Name="DeviceList" Style="{StaticResource GalleryTree}" Height="225" ViewMode="Flat"
+      AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" RowSizingMode="Fixed" RowHeight="32" GridLinesVisibility="None" HeadersVisibility="Column" IdPath="ID" ParentIdPath="ParentID" ExpandAll="True">
+      <opnx:OpnxTreeListView.Columns>
+       <opnx:OpnxTreeListViewTemplateColumn Header="Device" FieldName="Name" Width="*">
+        <opnx:OpnxTreeListViewTemplateColumn.CellTemplate><DataTemplate>
+         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="6,0">
+          <Border Width="{Binding Indent, RelativeSource={RelativeSource AncestorType={x:Type opnx:TreeListViewRow}}}"/>
+          <ToggleButton Width="22" Height="28" Focusable="False" Cursor="Hand"
+           Visibility="{Binding ExpanderVisibility, RelativeSource={RelativeSource AncestorType={x:Type opnx:TreeListViewRow}}}"
+           IsChecked="{Binding Expanded, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type opnx:TreeListViewRow}}}">
+           <ToggleButton.Template><ControlTemplate TargetType="ToggleButton">
+            <Border Background="Transparent"><Path x:Name="Arrow" Data="M 0,0 L 5,4 L 0,8" StrokeThickness="1.5" Stroke="{DynamicResource Common.Brush.Muted}"
+             HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5"/></Border>
+            <ControlTemplate.Triggers><Trigger Property="IsChecked" Value="True"><Setter TargetName="Arrow" Property="RenderTransform"><Setter.Value><RotateTransform Angle="90"/></Setter.Value></Setter></Trigger></ControlTemplate.Triggers>
+           </ControlTemplate></ToggleButton.Template>
+          </ToggleButton>
+          <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+         </StackPanel>
+        </DataTemplate></opnx:OpnxTreeListViewTemplateColumn.CellTemplate>
+       </opnx:OpnxTreeListViewTemplateColumn>
+       <opnx:OpnxTreeListViewTextColumn Header="Type" Binding="{Binding Kind}" FieldName="Kind" Width="120"/>
+       <opnx:OpnxTreeListViewTextColumn Header="Status" Binding="{Binding Status}" FieldName="Status" Width="120"/>
+      </opnx:OpnxTreeListView.Columns>
+     </opnx:OpnxTreeListView>
+     <Grid Margin="0,14,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <TextBlock x:Name="PageText" Foreground="{DynamicResource Common.Brush.Muted}" VerticalAlignment="Center"/>
+      <opnx:OpnxPagingControl x:Name="Paging" Grid.Column="1" MaxPageNumber="4" SelectedPageNumber="1" TotalPagingItemCount="4"/>
+     </Grid>
+    </StackPanel></Border>
+    <Border Style="{StaticResource Card}"><StackPanel>
+     <TextBlock Text="08 / Desktop integration" Style="{StaticResource CardTitle}"/>
+     <TextBlock Text="Notification · NotifyIcon · WindowTaskbar" Style="{StaticResource Caption}"/>
+     <TextBlock Text="Preview a WPF notification or opt in to a temporary system-tray icon." TextWrapping="Wrap" Margin="0,0,0,16"/>
+     <opnx:OpnxButton Content="Show notification" Style="{StaticResource PrimaryButton}" Click="Notify_Click" Margin="0,0,0,10"/>
+     <opnx:OpnxButton x:Name="TrayButton" Content="Enable tray icon" Click="Tray_Click" Margin="0,0,0,10"/>
+     <opnx:OpnxButton Content="Flash taskbar" Click="Flash_Click" Margin="0,0,0,14"/>
+     <TextBlock Text="Closing the gallery removes its tray icon and notifications. The window stays visible when the tray is enabled." Style="{StaticResource Caption}"/>
+    </StackPanel></Border>
+   </WrapPanel>
+  </ScrollViewer>
+  <Border Grid.Row="3" Background="{DynamicResource Common.Brush.Panel.Background}" BorderBrush="{DynamicResource Common.Brush.Border}" BorderThickness="0,1,0,0" Padding="24,0">
+   <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+    <TextBlock x:Name="ActivityText" Text="Ready — explore the controls." VerticalAlignment="Center" Foreground="{DynamicResource Common.Brush.Muted}"/>
+    <TextBlock x:Name="PaletteText" Grid.Column="1" VerticalAlignment="Center" Foreground="{DynamicResource Common.Brush.Muted}"/>
+   </Grid>
+  </Border>
+ </Grid>
+</Window>

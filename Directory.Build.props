@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <Configurations>Debug;Release</Configurations>
-    <OpnxLibVersion Condition="'$(OpnxLibVersion)' == ''">0.1.0-preview.20260716.1</OpnxLibVersion>
-    <OpnxUiWpfVersion Condition="'$(OpnxUiWpfVersion)' == ''">0.1.0-preview.20260716.1</OpnxUiWpfVersion>
+    <OpnxLibVersion Condition="'$(OpnxLibVersion)' == ''">0.1.0-preview.20261106.3</OpnxLibVersion>
+    <OpnxUiWpfVersion Condition="'$(OpnxUiWpfVersion)' == ''">0.1.0-preview.20261107.1</OpnxUiWpfVersion>
   </PropertyGroup>
 
 </Project>

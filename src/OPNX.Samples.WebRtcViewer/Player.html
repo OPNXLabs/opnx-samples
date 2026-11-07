@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OPNX WebRTC Player</title><style>
+:root{color-scheme:dark;--bg:#0e1721;--panel:#10202e;--fg:#e9eef5;--muted:#9baebe;--line:#304354;--accent:#4d70dc}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:13px "Segoe UI",sans-serif;display:flex;flex-direction:column;height:100vh}
+body.light{color-scheme:light;--bg:#f0f3f8;--panel:white;--fg:#223344;--muted:#566779;--line:#d4dce6}
+header,footer{padding:12px 18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--panel)}header{border-bottom:1px solid var(--line)}header strong{font-size:14px}.badge{color:var(--muted)}
+button{font:inherit;border:1px solid var(--line);border-radius:5px;padding:7px 14px;background:transparent;color:var(--fg);cursor:pointer}button:first-of-type{background:var(--accent);color:white;border-color:var(--accent)}button:disabled{opacity:.45;cursor:default}
+.player{position:relative;flex:1;min-height:120px;background:#000;display:flex;align-items:center;justify-content:center}video{width:100%;height:100%;position:absolute;object-fit:contain}.empty{color:#a2b0c0;text-align:center;pointer-events:none;z-index:1;padding:24px}.empty strong{display:block;font-size:21px;color:#e5eaf1;margin-bottom:10px}.empty[hidden]{display:none}footer{border-top:1px solid var(--line);font-variant-numeric:tabular-nums;color:var(--muted)}#status{margin-right:auto}#metrics{white-space:nowrap}
+</style></head><body>
+<header><strong>OPNX / WEBRTC</strong><span class="badge">H.264 · video only</span><span style="flex:1"></span><button id="connect">Connect player</button><button id="stop">Stop player</button><button id="fullscreen">Fullscreen</button></header>
+<div class="player" id="surface"><video id="video" autoplay muted playsinline controls></video><div class="empty" id="empty"><strong id="headline">Ready for a camera.</strong><span id="hint">Enter an RTSP URL in the desktop window, then connect.</span></div></div>
+<footer><span id="status" role="status">Waiting for source</span><span id="metrics">— × — · — FPS · — Mbps</span></footer>
+<script>
+'use strict';
+const video=document.getElementById('video'), status=document.getElementById('status'), metrics=document.getElementById('metrics'), empty=document.getElementById('empty'), connectButton=document.getElementById('connect');
+let session=null, serial=0, available=false, lastAvailable=false, statsBusy=false;
+function message(text){status.textContent=text}
+function stop(text='Player stopped'){
+ serial++; const old=session;session=null;
+ if(old){clearInterval(old.timer);old.ws.onclose=null;old.ws.close();old.pc.close()}
+ video.srcObject=null;empty.hidden=false;metrics.textContent='— × — · — FPS · — Mbps';message(text);connectButton.disabled=!available;
+}
+async function connect(){
+ stop('Connecting WebRTC…');
+ const id=serial, pc=new RTCPeerConnection({iceServers:[]}), ws=new WebSocket(new URL('signal',location.href).href.replace(/^http/,'ws'));
+ const s={pc,ws,id,last:null,chain:Promise.resolve(),timer:null};session=s;connectButton.disabled=true;
+ const current=()=>session===s&&id===serial;
+ pc.ontrack=e=>{if(!current())return;video.srcObject=e.streams[0]||new MediaStream([e.track]);video.play().catch(()=>message('Use the video play button to start playback.'))};
+ pc.onicecandidate=e=>{if(current()&&e.candidate&&ws.readyState===WebSocket.OPEN)ws.send(JSON.stringify(e.candidate.toJSON()))};
+ pc.onconnectionstatechange=()=>{if(!current())return;message('WebRTC '+pc.connectionState+(pc.connectionState==='connected'?' · Waiting for video/keyframe':''));if(['failed','closed','disconnected'].includes(pc.connectionState))stop('Connection ended · Click Connect player to retry')};
+ ws.onmessage=e=>{
+  s.chain=s.chain.then(async()=>{
+   if(!current())return;
+   if(e.data.startsWith('v=')){
+    await pc.setRemoteDescription({type:'offer',sdp:e.data});if(!current())return;
+    await pc.setLocalDescription(await pc.createAnswer());if(current()&&ws.readyState===WebSocket.OPEN)ws.send(pc.localDescription.sdp);
+   }else{const candidate=JSON.parse(e.data);if(candidate.candidate)await pc.addIceCandidate(candidate)}
+  }).catch(()=>{if(current())stop('Signaling failed · Click Connect player to retry')});
+ };
+ ws.onerror=()=>{if(current())stop('Source unavailable or WebRTC connection failed')};
+ ws.onclose=()=>{if(current())stop('Source stopped or player disconnected')};
+ s.timer=setInterval(async()=>{
+  if(!current()||statsBusy)return;statsBusy=true;
+  try{
+   const report=await pc.getStats();if(!current())return;
+   report.forEach(r=>{
+    if(r.type!=='inbound-rtp'||r.kind!=='video')return;
+    const mbps=s.last&&r.timestamp>s.last.timestamp?Math.max(0,(r.bytesReceived-s.last.bytes)*8/(r.timestamp-s.last.timestamp)/1000):0;
+    metrics.textContent=`${r.frameWidth||video.videoWidth||'—'} × ${r.frameHeight||video.videoHeight||'—'} · ${r.framesPerSecond?.toFixed(1)||'—'} FPS · ${mbps.toFixed(2)} Mbps`;
+    s.last={timestamp:r.timestamp,bytes:r.bytesReceived};
+    if(r.framesDecoded>0){empty.hidden=true;message('Playing · WebRTC connected')}
+   });
+  }catch{}finally{statsBusy=false}
+ },1000);
+}
+video.addEventListener('playing',()=>{empty.hidden=true;message('Playing · WebRTC connected')});
+connectButton.onclick=connect;document.getElementById('stop').onclick=()=>stop();
+document.getElementById('fullscreen').onclick=()=>document.getElementById('surface').requestFullscreen().catch(()=>message('Fullscreen is unavailable'));
+async function poll(){
+ try{
+  const response=await fetch(new URL('status',location.href),{cache:'no-store'});if(!response.ok)throw Error();
+  const state=await response.json();available=state.ready;connectButton.disabled=!available||!!session;
+  if(available&&!lastAvailable&&!session)connect();
+  if(!available&&session)stop('Waiting for RTSP source');
+  lastAvailable=available;
+ }catch{available=false;lastAvailable=false;if(session)stop('Desktop relay unavailable');else message('Desktop relay unavailable');connectButton.disabled=true}
+}
+setInterval(poll,1000);poll();
+if(window.chrome?.webview)window.chrome.webview.addEventListener('message',e=>{
+ const data=e.data;
+ if(data.type==='connect'){available=true;lastAvailable=true;connect()}
+ else if(data.type==='stop'){available=false;lastAvailable=false;stop()}
+ else if(data.type==='theme'){
+  document.body.classList.toggle('light',data.light);
+  document.documentElement.style.setProperty('--accent',({Teal:'#158f89',Amber:'#ad771a'})[data.accent]||'#4d70dc');
+ }
+});
+window.addEventListener('pagehide',()=>stop());
+</script></body></html>

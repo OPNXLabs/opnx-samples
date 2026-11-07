@@ -8,25 +8,25 @@ The OPNX Samples license applies only to OPNX-owned sample code and documentatio
 
 ### OPNX.Lib
 
-- Version: `0.1.0-preview.20260716.1`
+- Version: `0.1.0-preview.20261106.3`
 - Repository: [OPNXLabs/opnx-lib](https://github.com/OPNXLabs/opnx-lib)
 - License: OPNX source-available license
 - Used by: all sample projects
 
 ### OPNX.UI.WPF
 
-- Version: `0.1.0-preview.20260716.1`
+- Version: `0.1.0-preview.20261107.1`
 - Repository: [OPNXLabs/opnx-ui](https://github.com/OPNXLabs/opnx-ui)
 - License: OPNX source-available license
-- Used by: `OPNX.Samples.RtspMultiLiveViewer`, `OPNX.Samples.PlaybackTimeline`
+- Used by: `OPNX.Samples.RtspViewer`, `OPNX.Samples.PlaybackTimeline`, `OPNX.Samples.ControlGallery`, `OPNX.Samples.SystemMonitoring`, `OPNX.Samples.WebRtcViewer`
 
 Users must review the license and third-party notices distributed with each OPNX package. Publishing these samples does not expand the rights granted by those packages.
 
 ## Version Scope
 
-The versions above match `Directory.Build.props` and the sample project references. Current Lib/UI repository sources have newer APIs, FFmpeg bindings, and WebRTC dependencies that are not automatically included in these pinned packages. Updating samples requires matching API migrations and native-runtime preparation, not just replacing the version strings.
+The versions above match `Directory.Build.props` and the sample project references. These packages use FFmpeg.AutoGen 9.0.1.1 and include WebRTC dependencies through the aggregate Lib package. Match the native runtimes to the exact restored dependency graph.
 
-If upgraded to the current Lib SDK, preserve ASP.NET Core notices and distinguish the MIT DataChannelDotnet wrapper from native libdatachannel (MPL-2.0) and OpenSSL 3 (Apache-2.0). The notices delivered by the exact selected packages remain authoritative.
+Preserve ASP.NET Core notices and distinguish the MIT DataChannelDotnet wrapper from native libdatachannel (MPL-2.0) and OpenSSL 3 (Apache-2.0). The notices delivered by the exact selected packages remain authoritative.
 
 ## FFmpeg Native Libraries
 
@@ -45,3 +45,7 @@ References:
 ## Transitive Dependencies
 
 OPNX.Lib and OPNX.UI.WPF bring additional NuGet and native dependencies. Their package contents and third-party notices are the authoritative source for the exact versions and applicable license texts.
+
+## Microsoft WebView2
+
+`OPNX.Samples.WebRtcViewer` additionally uses Microsoft.Web.WebView2 1.0.4258.31 under the [Microsoft package license](https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.4258.31/License), included as `LICENSE.txt` in that NuGet package. The Microsoft Edge WebView2 Runtime is installed and licensed separately. WebRTC native dependencies (DataChannelDotnet/libdatachannel) are provided through OPNX.Lib; see its bundled third-party notices. This sample does not bundle FFmpeg or copy OPNX.V application code.

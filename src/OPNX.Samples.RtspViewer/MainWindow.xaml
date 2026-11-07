@@ -1,0 +1,77 @@
+<Window x:Class="OPNX.Samples.RtspViewer.MainWindow"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:opnx="clr-namespace:OPNX.UI.WPF.Controls;assembly=OPNX.UI.WPF"
+ Title="OPNX RTSP Viewer" Width="1280" Height="840" MinWidth="1120" MinHeight="680"
+ WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="CanResizeWithGrip"
+ FontFamily="Segoe UI" FontSize="13" Background="{DynamicResource Common.Brush.Background}" Foreground="{DynamicResource Common.Brush.Foreground}"
+ Loaded="Window_Loaded" Closing="Window_Closing">
+ <Grid><Grid.RowDefinitions><RowDefinition Height="48"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="40"/></Grid.RowDefinitions>
+  <opnx:OpnxTitlebar Background="{DynamicResource Common.Brush.Panel.Background}" ButtonForeground="{DynamicResource Common.Brush.Foreground}" ButtonSize="30" ControlBoxMargin="0,0,16,0">
+   <opnx:OpnxTitlebar.TitleContent><StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="24,0,0,0">
+    <Border Width="9" Height="9" CornerRadius="2" Background="{DynamicResource Common.Brush.Accent}" Margin="0,0,12,0"/>
+    <TextBlock Text="OPNX" FontSize="16" FontWeight="Bold"/><TextBlock Text=" /  RTSP VIEWER" Foreground="{DynamicResource Common.Brush.Muted}" FontSize="12" VerticalAlignment="Center"/>
+   </StackPanel></opnx:OpnxTitlebar.TitleContent>
+  </opnx:OpnxTitlebar>
+  <Grid Grid.Row="1" Margin="24,20,24,20"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+   <StackPanel><TextBlock Text="Every camera. One workspace." FontSize="25" FontWeight="SemiBold"/>
+    <TextBlock Text="Connect RTSP sources, arrange tiles and inspect the live video." Foreground="{DynamicResource Common.Brush.Muted}" Margin="0,6,0,0"/>
+   </StackPanel>
+   <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+    <opnx:OpnxComboBox x:Name="ThemeBox" Width="155" Margin="0,0,10,0" SelectionChanged="Theme_Changed" ToolTip="Theme"/>
+    <opnx:OpnxComboBox x:Name="AccentBox" Width="100" SelectionChanged="Theme_Changed" ToolTip="Accent color"/>
+   </StackPanel>
+  </Grid>
+  <Grid Grid.Row="2" Margin="24,0,24,20"><Grid.ColumnDefinitions><ColumnDefinition Width="262"/><ColumnDefinition Width="16"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+   <Border Background="{DynamicResource Common.Brush.Panel.Background}" BorderBrush="{DynamicResource Common.Brush.Border}" BorderThickness="1" CornerRadius="10" Padding="18">
+    <Grid><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+     <StackPanel><TextBlock Text="Sources" FontSize="18" FontWeight="SemiBold"/>
+      <TextBlock Text="{Binding ElementName=CameraTree, Path=Items.Count, StringFormat={}{0} registered cameras}" Foreground="{DynamicResource Common.Brush.Muted}" FontSize="12" Margin="0,6,0,14"/>
+     </StackPanel>
+     <Grid Grid.Row="1">
+      <opnx:OpnxTreeListView x:Name="CameraTree" Style="{StaticResource GalleryTree}" AutoGenerateColumns="False" HeadersVisibility="None" IsReadOnly="True" CanUserAddRows="False"
+       RowHeight="52" GridLinesVisibility="None" BorderThickness="0" Background="Transparent" ViewMode="Flat" IdPath="Id" MouseDoubleClick="CameraTree_MouseDoubleClick">
+       <opnx:OpnxTreeListView.Columns><opnx:OpnxTreeListViewTemplateColumn Width="*" FieldName="Name"><opnx:OpnxTreeListViewTemplateColumn.CellTemplate><DataTemplate>
+        <Grid Margin="4,0"><Grid.ColumnDefinitions><ColumnDefinition Width="8"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+         <Ellipse Width="7" Height="7" Fill="{Binding StatusBrush}" VerticalAlignment="Center"/>
+         <StackPanel Grid.Column="2" VerticalAlignment="Center"><TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis"/>
+          <TextBlock Text="{Binding Status}" Foreground="{DynamicResource Common.Brush.Muted}" FontSize="11" TextTrimming="CharacterEllipsis" Margin="0,3,0,0"/>
+         </StackPanel>
+        </Grid>
+       </DataTemplate></opnx:OpnxTreeListViewTemplateColumn.CellTemplate></opnx:OpnxTreeListViewTemplateColumn></opnx:OpnxTreeListView.Columns>
+      </opnx:OpnxTreeListView>
+      <TextBlock Text="Add your first camera to begin." TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource Common.Brush.Muted}" IsHitTestVisible="False">
+       <TextBlock.Style><Style TargetType="TextBlock"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding ElementName=CameraTree, Path=Items.Count}" Value="0"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></TextBlock.Style>
+      </TextBlock>
+     </Grid>
+     <StackPanel Grid.Row="2"><TextBlock Text="Double-click a source to play it in the selected or next empty tile." Style="{StaticResource Caption}" Margin="0,12,0,12"/>
+      <opnx:OpnxButton Content="Add camera" Style="{StaticResource PrimaryButton}" Click="AddCamera_Click"/>
+     </StackPanel>
+    </Grid>
+   </Border>
+   <Grid Grid.Column="2"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="14"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+    <Border Background="{DynamicResource Common.Brush.Panel.Background}" BorderBrush="{DynamicResource Common.Brush.Border}" BorderThickness="1" CornerRadius="10" Padding="14">
+     <StackPanel>
+      <WrapPanel VerticalAlignment="Center">
+       <opnx:OpnxComboBox x:Name="LayoutComboBox" Width="88" SelectedIndex="1" SelectionChanged="LayoutComboBox_SelectionChanged" Margin="0,0,12,8">
+        <ComboBoxItem Content="1 × 1" Tag="1"/><ComboBoxItem Content="2 × 2" Tag="2"/><ComboBoxItem Content="3 × 3" Tag="3"/><ComboBoxItem Content="4 × 4" Tag="4"/>
+       </opnx:OpnxComboBox>
+       <opnx:OpnxNumericBox x:Name="SplitRowsNumericBox" Width="60" Minimum="1" Maximum="8" Value="2" Margin="0,0,6,8"/>
+       <TextBlock Text="×" VerticalAlignment="Center" Margin="0,0,6,8" Foreground="{DynamicResource Common.Brush.Muted}"/>
+       <opnx:OpnxNumericBox x:Name="SplitColumnsNumericBox" Width="60" Minimum="1" Maximum="8" Value="2" Margin="0,0,10,8"/>
+       <opnx:OpnxButton Content="Split" Click="SplitSelectedCell_Click" Margin="0,0,6,8"/>
+       <opnx:OpnxButton Content="Merge" Click="MergeSelectedCell_Click" Margin="0,0,12,8"/>
+       <opnx:OpnxButton Content="Save layout" Click="SaveLayout_Click" Margin="0,0,6,8"/>
+       <opnx:OpnxButton Content="Restore" Click="RestoreLayout_Click" Margin="0,0,6,8"/>
+       <opnx:OpnxButton Content="Detach video" Click="Detach_Click" Margin="0,0,0,8"/>
+      </WrapPanel>
+      <TextBlock Text="Drag tile borders to resize · wheel to zoom · right-click video to capture or reset" Foreground="{DynamicResource Common.Brush.Muted}" FontSize="11" TextWrapping="Wrap"/>
+     </StackPanel>
+    </Border>
+    <Border Grid.Row="2" Background="Black" BorderBrush="{DynamicResource Common.Brush.Border}" BorderThickness="1" CornerRadius="8" ClipToBounds="True"><ContentControl x:Name="MultiViewHost"/></Border>
+   </Grid>
+  </Grid>
+  <Border Grid.Row="3" Background="{DynamicResource Common.Brush.Panel.Background}" BorderBrush="{DynamicResource Common.Brush.Border}" BorderThickness="0,1,0,0" Padding="24,0">
+   <TextBlock x:Name="StatusTextBlock" Text="Ready" Foreground="{DynamicResource Common.Brush.Muted}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
+  </Border>
+ </Grid>
+</Window>

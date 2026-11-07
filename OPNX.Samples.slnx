@@ -16,16 +16,25 @@
     <File Path="SECURITY.md" />
     <File Path="THIRD-PARTY-NOTICES.md" />
   </Folder>
-  <Project Path="src/OPNX.Samples.EntityStore/OPNX.Samples.EntityStore.csproj">
+  <Project Path="src/OPNX.Samples.RtspViewer/OPNX.Samples.RtspViewer.csproj">
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="src/OPNX.Samples.WebRtcViewer/OPNX.Samples.WebRtcViewer.csproj">
     <Platform Solution="*|x64" Project="x64" />
   </Project>
   <Project Path="src/OPNX.Samples.PlaybackTimeline/OPNX.Samples.PlaybackTimeline.csproj">
     <Platform Solution="Debug|x64" Project="x64" />
   </Project>
-  <Project Path="src/OPNX.Samples.RtspMultiLiveViewer/OPNX.Samples.RtspMultiLiveViewer.csproj">
+  <Project Path="src/OPNX.Samples.ControlGallery/OPNX.Samples.ControlGallery.csproj">
     <Platform Solution="*|x64" Project="x64" />
   </Project>
-  <Project Path="src/OPNX.Samples.TcpChat/OPNX.Samples.TcpChat.csproj">
+  <Project Path="src/OPNX.Samples.SystemMonitoring/OPNX.Samples.SystemMonitoring.csproj">
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="src/OPNX.Samples.ProtocolChat/OPNX.Samples.ProtocolChat.csproj">
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="src/OPNX.Samples.EntityStore/OPNX.Samples.EntityStore.csproj">
     <Platform Solution="*|x64" Project="x64" />
   </Project>
 </Solution>

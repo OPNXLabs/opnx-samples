@@ -39,7 +39,7 @@ All rights, title, interest, and intellectual property rights in the OPNX-owned 
 
 5. Dependencies And Native Runtimes
 
-OPNX.Lib, OPNX.UI, FFmpeg, and all other dependencies are governed by their respective licenses and notices. FFmpeg native binaries are not licensed or distributed under this license. Anyone obtaining, bundling, redistributing, or deploying such binaries is responsible for the applicable license obligations of the selected build.
+OPNX.Lib, OPNX.UI, FFmpeg, the Microsoft.Web.WebView2 SDK, the Microsoft Edge WebView2 Runtime, and all other dependencies are governed by their respective licenses and notices. FFmpeg native binaries are not licensed or distributed under this license. Anyone obtaining, bundling, redistributing, or deploying such binaries is responsible for the applicable license obligations of the selected build.
 
 See THIRD-PARTY-NOTICES.md for additional notices.
 

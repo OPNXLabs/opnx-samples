@@ -1,0 +1,284 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:opnx="clr-namespace:OPNX.UI.WPF.Controls;assembly=OPNX.UI.WPF">
+ <Style TargetType="{x:Type opnx:OpnxButton}" BasedOn="{StaticResource DefaultOpnxButtonStyle}">
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="BorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="BorderThickness" Value="1" />
+  <Setter Property="Padding" Value="14,7" />
+  <Setter Property="MinHeight" Value="34" />
+  <Setter Property="Cursor" Value="Hand" />
+  <Setter Property="CornerRadius" Value="5" />
+  <Setter Property="MouseOverBackground" Value="{DynamicResource Common.Brush.Control.MouseOverBackground}" />
+  <Setter Property="MouseOverForeground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="MouseOverBorderBrush" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="PressedBackground" Value="{DynamicResource Common.Brush.Control.PressedBackground}" />
+  <Setter Property="PressedForeground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="PressedBorderBrush" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="DisabledOpacity" Value="0.4" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxButton}" x:Key="PrimaryButton" BasedOn="{StaticResource {x:Type opnx:OpnxButton}}">
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.OnAccent}" />
+  <Setter Property="MouseOverBackground" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="MouseOverForeground" Value="{DynamicResource Common.Brush.OnAccent}" />
+  <Setter Property="PressedBackground" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="PressedForeground" Value="{DynamicResource Common.Brush.OnAccent}" />
+  <Setter Property="MouseOverOpacity" Value="0.85" />
+  <Setter Property="PressedOpacity" Value="0.7" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxTextBox}" BasedOn="{StaticResource DefaultOpnxTextBoxStyle}">
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="BorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="BorderThickness" Value="1" />
+  <Setter Property="Height" Value="36" />
+  <Setter Property="Padding" Value="10,0" />
+  <Setter Property="VerticalContentAlignment" Value="Center" />
+  <Setter Property="PlaceholderForeground" Value="{DynamicResource Common.Brush.Muted}" />
+  <Setter Property="ClearButtonEnabled" Value="True" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxPasswordBox}" BasedOn="{StaticResource DefaultOpnxPasswordBoxStyle}">
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="BorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="BorderThickness" Value="1" />
+  <Setter Property="Height" Value="36" />
+  <Setter Property="Padding" Value="10,0" />
+  <Setter Property="VerticalContentAlignment" Value="Center" />
+  <Setter Property="PlaceholderForeground" Value="{DynamicResource Common.Brush.Muted}" />
+  <Setter Property="ClearButtonEnabled" Value="True" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxNumericBox}" BasedOn="{StaticResource DefaultOpnxNumericBoxStyle}">
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="BorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="BorderThickness" Value="1" />
+  <Setter Property="Height" Value="36" />
+  <Setter Property="Padding" Value="10,0" />
+  <Setter Property="VerticalContentAlignment" Value="Center" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxComboBox}" BasedOn="{StaticResource DefaultOpnxComboBoxStyle}">
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="BorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="BorderThickness" Value="1" />
+  <Setter Property="Height" Value="36" />
+  <Setter Property="Padding" Value="10,0" />
+  <Setter Property="PlaceholderForeground" Value="{DynamicResource Common.Brush.Muted}" />
+  <Setter Property="DropDownBackground" Value="{DynamicResource Common.Brush.Panel.Background}" />
+  <Setter Property="DropDownBorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="DropDownItemForeground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="DropDownItemSelectedForeground" Value="{DynamicResource Common.Brush.OnAccent}" />
+  <Setter Property="DropDownItemSelectedBackground" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="DropDownItemMouseOverBackground" Value="{DynamicResource Common.Brush.Control.MouseOverBackground}" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxToggleButton}" BasedOn="{StaticResource DefaultOpnxToggleButtonStyle}">
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="BorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="BorderThickness" Value="1" />
+  <Setter Property="Padding" Value="14,7" />
+  <Setter Property="MinHeight" Value="34" />
+  <Setter Property="Cursor" Value="Hand" />
+  <Setter Property="CornerRadius" Value="5" />
+  <Setter Property="MouseOverBackground" Value="{DynamicResource Common.Brush.Control.MouseOverBackground}" />
+  <Setter Property="MouseOverForeground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="MouseOverBorderBrush" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="PressedBackground" Value="{DynamicResource Common.Brush.Control.PressedBackground}" />
+  <Setter Property="PressedForeground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="PressedBorderBrush" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="DisabledOpacity" Value="0.4" />
+  <Setter Property="CheckedBackground" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="CheckedForeground" Value="{DynamicResource Common.Brush.OnAccent}" />
+  <Setter Property="CheckedBorderBrush" Value="{DynamicResource Common.Brush.Accent}" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxCheckBox}" BasedOn="{StaticResource DefaultOpnxCheckBoxStyle}">
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="BorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="BorderThickness" Value="1" />
+  <Setter Property="CheckBoxIConForeground" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="CheckBoxWidth" Value="20" />
+  <Setter Property="CheckBoxHeight" Value="20" />
+  <Setter Property="TextMargin" Value="9,0,0,0" />
+  <Setter Property="CornerRadius" Value="3" />
+  <Setter Property="Margin" Value="0,5,0,5" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxRadioButton}" BasedOn="{StaticResource DefaultOpnxRadioButtonStyle}">
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="BorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="BorderThickness" Value="1" />
+  <Setter Property="CheckedBackground" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="CheckedForeground" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="CheckedBorderBrush" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="Margin" Value="0,5,16,5" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxIpTextBox}">
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="BorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="BorderThickness" Value="1" />
+  <Setter Property="Height" Value="36" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxDatePicker}">
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="BorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="BorderThickness" Value="1" />
+  <Setter Property="Height" Value="36" />
+  <Setter Property="IconBrush" Value="{DynamicResource Common.Brush.Muted}" />
+  <Setter Property="CalendarBackground" Value="{DynamicResource Common.Brush.Panel.Background}" />
+  <Setter Property="CalendarBorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxTimePicker}">
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="BorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="BorderThickness" Value="1" />
+  <Setter Property="Height" Value="36" />
+  <Setter Property="IconBrush" Value="{DynamicResource Common.Brush.Muted}" />
+  <Setter Property="PopupBackground" Value="{DynamicResource Common.Brush.Panel.Background}" />
+  <Setter Property="PopupForeground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="PopupBorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="PopupItemBackground" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="PopupItemMouseOverBackground" Value="{DynamicResource Common.Brush.Control.MouseOverBackground}" />
+  <Setter Property="PopupSelectedItemBackground" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="PopupSelectedItemForeground" Value="{DynamicResource Common.Brush.OnAccent}" />
+  <Setter Property="PopupSelectedItemBorderBrush" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="DropDownButtonBackground" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="DropDownButtonBorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="DropDownButtonMouseOverBackground" Value="{DynamicResource Common.Brush.Control.MouseOverBackground}" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxStepSelector}">
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="Height" Value="36" />
+  <Setter Property="ButtonWidth" Value="32" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxTabControl}" BasedOn="{StaticResource DefaultOpnxTabControlStyle}">
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="BorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="BorderThickness" Value="0" />
+  <Setter Property="Padding" Value="12" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxTabItem}" BasedOn="{StaticResource DefaultOpnxTabItemStyle}">
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Muted}" />
+  <Setter Property="SelectedBackground" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="SelectedForeground" Value="{DynamicResource Common.Brush.OnAccent}" />
+  <Setter Property="MouseOverBackground" Value="{DynamicResource Common.Brush.Control.MouseOverBackground}" />
+  <Setter Property="MouseOverForeground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="TabHeaderHeight" Value="34" />
+  <Setter Property="TabHeaderWidth" Value="96" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxNavigatorItem}" BasedOn="{StaticResource DefaultOpnxToggleButtonStyle}">
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Muted}" />
+  <Setter Property="CheckedBackground" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="CheckedForeground" Value="{DynamicResource Common.Brush.OnAccent}" />
+  <Setter Property="MouseOverBackground" Value="{DynamicResource Common.Brush.Control.MouseOverBackground}" />
+  <Setter Property="BadgeBrush" Value="{DynamicResource Common.Brush.Status.Error}" />
+  <Setter Property="Padding" Value="14,8" />
+  <Setter Property="Margin" Value="0,0,6,0" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxPagingControl}">
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="PageButtonBackground" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="PageButtonForeground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="PageButtonSelectedBackground" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="PageButtonSelectedForeground" Value="{DynamicResource Common.Brush.OnAccent}" />
+  <Setter Property="PageButtonDisabledForeground" Value="{DynamicResource Common.Brush.Muted}" />
+  <Setter Property="PageButtonBorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="MoveButtonBackground" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="MoveButtonForeground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="PageButtonWidth" Value="32" />
+  <Setter Property="PageButtonHeight" Value="32" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxRadialProgressBar}">
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="IndicatorThickness" Value="6" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxRoundRectButton}" x:Key="RoundButton" BasedOn="{StaticResource {x:Type opnx:OpnxRoundRectButton}}">
+  <Setter Property="HorizontalContentAlignment" Value="Center" />
+  <Setter Property="VerticalContentAlignment" Value="Center" />
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.OnAccent}" />
+  <Setter Property="ButtonWidth" Value="110" />
+  <Setter Property="ButtonHeight" Value="36" />
+  <Setter Property="Width" Value="110" />
+  <Setter Property="Height" Value="36" />
+  <Setter Property="CornerRadius" Value="16" />
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxArcButton}" x:Key="ArcButton" BasedOn="{StaticResource {x:Type opnx:OpnxArcButton}}">
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.OnAccent}" />
+  <Setter Property="OuterRadius" Value="48" />
+  <Setter Property="InnerRadius" Value="27" />
+  <Setter Property="StartAngle" Value="180" />
+  <Setter Property="EndAngle" Value="360" />
+  <Setter Property="Width" Value="100" />
+  <Setter Property="Height" Value="60" />
+ </Style>
+ <Style x:Key="GalleryRow" TargetType="{x:Type opnx:TreeListViewRow}" BasedOn="{StaticResource OpnxTreeListView.RowStyle}">
+  <Style.Triggers><Trigger Property="HasChild" Value="False"><Setter Property="ExpanderVisibility" Value="Hidden"/></Trigger></Style.Triggers>
+ </Style>
+ <Style TargetType="{x:Type opnx:OpnxTreeListView}" x:Key="GalleryTree" BasedOn="{StaticResource {x:Type opnx:OpnxTreeListView}}">
+  <Setter Property="RowStyle" Value="{StaticResource GalleryRow}" />
+  <Setter Property="IndentWidth" Value="18" />
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Foreground}" />
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="BorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="BorderThickness" Value="1" />
+  <Setter Property="ColumnHeaderBackground" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="SelectedBackground" Value="{DynamicResource Common.Brush.Accent}" />
+  <Setter Property="SelectedForeground" Value="{DynamicResource Common.Brush.OnAccent}" />
+  <Setter Property="MouseOverBackground" Value="{DynamicResource Common.Brush.Control.MouseOverBackground}" />
+  <Setter Property="RowSpacing" Value="2" />
+  <Setter Property="ColumnHeaderSpacing" Value="6" />
+ </Style>
+ <Style TargetType="{x:Type TextBlock}" x:Key="CardTitle">
+  <Setter Property="FontSize" Value="19" />
+  <Setter Property="FontWeight" Value="SemiBold" />
+  <Setter Property="Margin" Value="0,0,0,6" />
+ </Style>
+ <Style TargetType="{x:Type TextBlock}" x:Key="Caption">
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Muted}" />
+  <Setter Property="FontSize" Value="12" />
+  <Setter Property="TextWrapping" Value="Wrap" />
+  <Setter Property="Margin" Value="0,0,0,16" />
+ </Style>
+ <Style TargetType="{x:Type Border}" x:Key="Card">
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Panel.Background}" />
+  <Setter Property="BorderBrush" Value="{DynamicResource Common.Brush.Border}" />
+  <Setter Property="BorderThickness" Value="1" />
+  <Setter Property="CornerRadius" Value="10" />
+  <Setter Property="Padding" Value="22" />
+  <Setter Property="Width" Value="366" />
+  <Setter Property="Margin" Value="0,0,16,16" />
+  <Setter Property="VerticalAlignment" Value="Top" />
+ </Style>
+ <Style x:Key="ValidatedText" TargetType="{x:Type opnx:OpnxTextBox}" BasedOn="{StaticResource {x:Type opnx:OpnxTextBox}}">
+  <Style.Triggers><Trigger Property="Validation.HasError" Value="True">
+   <Setter Property="BorderBrush" Value="{DynamicResource Common.Brush.Status.Error}" />
+   <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+  </Trigger></Style.Triggers>
+ </Style>
+ <Style x:Key="RangeChoice" TargetType="RadioButton">
+  <Setter Property="Foreground" Value="{DynamicResource Common.Brush.Muted}" />
+  <Setter Property="Background" Value="{DynamicResource Common.Brush.Control.Background}" />
+  <Setter Property="Cursor" Value="Hand" />
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="RadioButton">
+   <Border Background="{TemplateBinding Background}" CornerRadius="4" Padding="3,6" Margin="1">
+    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+   </Border>
+  </ControlTemplate></Setter.Value></Setter>
+  <Style.Triggers><Trigger Property="IsChecked" Value="True">
+   <Setter Property="Background" Value="{DynamicResource Common.Brush.Accent}" />
+   <Setter Property="Foreground" Value="{DynamicResource Common.Brush.OnAccent}" />
+  </Trigger></Style.Triggers>
+ </Style>
+</ResourceDictionary>

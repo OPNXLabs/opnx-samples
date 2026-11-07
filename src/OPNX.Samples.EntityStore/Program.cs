@@ -18,8 +18,13 @@ internal static class Program
         InsertSampleDevices(store);
         PrintDevices(store, "After insert");
 
+        var tracked = store.FindEntity<SampleDeviceEntity, int>(2);
         UpdateDevice(store, id: 2);
         PrintDevices(store, "After update");
+        Console.WriteLine($"Same tracked instance: {ReferenceEquals(tracked, store.FindEntity<SampleDeviceEntity, int>(2))}");
+
+        if (tracked != null)
+            tracked.Status = "Online";
 
         FindDevice(store, id: 1);
 
@@ -33,22 +38,25 @@ internal static class Program
 
     private static void InsertSampleDevices(EntityStore store)
     {
-        store.InsertEntity(new SampleDeviceEntity
+        store.InsertEntity<SampleDeviceEntity, int>(new SampleDeviceEntity
         {
+            ID = 1,
             Name = "Lobby Camera",
             Address = "192.168.10.21",
             Status = "Online"
         });
 
-        store.InsertEntity(new SampleDeviceEntity
+        store.InsertEntity<SampleDeviceEntity, int>(new SampleDeviceEntity
         {
+            ID = 2,
             Name = "Parking Camera",
             Address = "192.168.10.22",
             Status = "Online"
         });
 
-        store.InsertEntity(new SampleDeviceEntity
+        store.InsertEntity<SampleDeviceEntity, int>(new SampleDeviceEntity
         {
+            ID = 3,
             Name = "Warehouse Sensor",
             Address = "192.168.10.31",
             Status = "Idle"
@@ -57,7 +65,7 @@ internal static class Program
 
     private static void UpdateDevice(EntityStore store, int id)
     {
-        var current = store.FindEntity<SampleDeviceEntity>(id);
+        var current = store.FindEntity<SampleDeviceEntity, int>(id);
         if (current == null)
             return;
 
@@ -66,12 +74,12 @@ internal static class Program
             return;
 
         updated.Status = "Maintenance";
-        store.UpdateEntity(updated);
+        store.UpdateEntity<SampleDeviceEntity, int>(updated);
     }
 
     private static void FindDevice(EntityStore store, int id)
     {
-        var device = store.FindEntity<SampleDeviceEntity>(id);
+        var device = store.FindEntity<SampleDeviceEntity, int>(id);
         Console.WriteLine();
         Console.WriteLine(device == null
             ? $"Find ID={id}: not found"
@@ -80,9 +88,9 @@ internal static class Program
 
     private static void DeleteDevice(EntityStore store, int id)
     {
-        var device = store.FindEntity<SampleDeviceEntity>(id);
+        var device = store.FindEntity<SampleDeviceEntity, int>(id);
         if (device != null)
-            store.DeleteEntity(device);
+            store.DeleteEntity<SampleDeviceEntity, int>(device);
     }
 
     private static void PrintDevices(EntityStore store, string title)
@@ -90,7 +98,7 @@ internal static class Program
         Console.WriteLine();
         Console.WriteLine($"[{title}]");
 
-        foreach (var device in store.GetEntities<SampleDeviceEntity>())
+        foreach (var device in store.GetEntities<SampleDeviceEntity, int>())
             Console.WriteLine($"  {FormatDevice(device)}");
     }
 
@@ -101,14 +109,20 @@ internal static class Program
 
     private static void Store_EntityChanged(object sender, EntityChangedEventArgs e)
     {
-        string entityName = e.NewEntity?.DisplayText
-                            ?? e.OldEntity?.DisplayText
-                            ?? e.NewEntity?.EntityTypeName
-                            ?? e.OldEntity?.EntityTypeName
-                            ?? "unknown";
+        if (!e.Is<SampleDeviceEntity>())
+            return;
 
-        string suffix = e.ChangedType == DataChangedTypes.PropertyChanged
-            ? $" {e.PropertyName}={e.Value}"
+        var current = sender is EntityStore store
+            ? e.FindCurrent<SampleDeviceEntity, int>(store)
+            : null;
+        string entityName = current?.DisplayText
+                            ?? e.GetCurrentValue<string>(nameof(SampleDeviceEntity.Name))
+                            ?? e.GetOriginalValue<string>(nameof(SampleDeviceEntity.Name))
+                            ?? e.EntityType.Name;
+
+        string suffix = e.ChangedProperties.Count > 0
+            ? " " + string.Join(", ", e.ChangedProperties.Select(propertyName =>
+                $"{propertyName}: {e.OriginalValues.GetValueOrDefault(propertyName) ?? "(unavailable)"} -> {e.CurrentValues.GetValueOrDefault(propertyName)}"))
             : string.Empty;
 
         Console.WriteLine($"  event: {e.ChangedType} {entityName}{suffix}");
@@ -126,21 +140,21 @@ internal sealed class SampleDeviceEntity : Entity
 
     public override string? DisplayText => Name;
 
-    [DataColumn(ColIndex = 1, SqlDataType = SqlDbType.NVarChar, FieldLength = 100)]
+    [EntityColumn(ColIndex = 1, SqlDataType = SqlDbType.NVarChar, FieldLength = 100)]
     public string Name
     {
         get => _name;
         set => SetProperty(ref _name, value);
     }
 
-    [DataColumn(ColIndex = 2, SqlDataType = SqlDbType.NVarChar, FieldLength = 64)]
+    [EntityColumn(ColIndex = 2, SqlDataType = SqlDbType.NVarChar, FieldLength = 64)]
     public string Address
     {
         get => _address;
         set => SetProperty(ref _address, value);
     }
 
-    [DataColumn(ColIndex = 3, SqlDataType = SqlDbType.NVarChar, FieldLength = 32)]
+    [EntityColumn(ColIndex = 3, SqlDataType = SqlDbType.NVarChar, FieldLength = 32)]
     public string Status
     {
         get => _status;

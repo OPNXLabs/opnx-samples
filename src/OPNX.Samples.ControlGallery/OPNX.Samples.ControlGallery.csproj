@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="OPNX.Lib" Version="$(OpnxLibVersion)" />
+    <PackageReference Include="OPNX.UI.WPF" Version="$(OpnxUiWpfVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Shared\Themes\SampleTheme.cs" Link="SampleTheme.cs" />
+    <Page Include="..\Shared\Themes\Controls.xaml" Link="Themes\Controls.xaml" />
+  </ItemGroup>
+</Project>
