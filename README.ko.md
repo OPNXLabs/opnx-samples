@@ -337,3 +337,7 @@ OPNX Samples는 대한민국에 사업자로 등록된 오픈엑스(OPNX)가 개
 
 - 보안 문제는 [SECURITY.ko.md](https://github.com/OPNXLabs/opnx-samples/blob/master/SECURITY.ko.md)의 절차에 따라 비공개로 제보해 주세요.
 - 이슈 등록이나 변경 제안 전 [CONTRIBUTING.ko.md](https://github.com/OPNXLabs/opnx-samples/blob/master/CONTRIBUTING.ko.md)를 확인해 주세요.
+
+## AI 개발 지원 안내
+
+본 샘플은 AI 코딩 도구의 도움을 받아 개발되었습니다. 빌드 및 일부 실행 시나리오를 검증했으며, 모든 환경에서의 동작을 보장하지는 않습니다. 사용 전 적용 환경에서 충분히 검토하고 테스트해 주세요.

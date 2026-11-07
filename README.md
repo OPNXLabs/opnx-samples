@@ -339,3 +339,7 @@ OPNX Samples is developed and distributed by 오픈엑스 (OPNX), a business reg
 
 - Report security issues privately as described in [SECURITY.md](https://github.com/OPNXLabs/opnx-samples/blob/master/SECURITY.md).
 - Review [CONTRIBUTING.md](https://github.com/OPNXLabs/opnx-samples/blob/master/CONTRIBUTING.md) before opening an issue or proposing a change.
+
+## AI Development Assistance
+
+These samples were developed with assistance from AI coding tools. Builds and selected runtime scenarios have been verified, but behavior may vary across environments. Review and test the samples in your target environment before use.
