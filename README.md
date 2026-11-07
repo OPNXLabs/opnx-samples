@@ -2,7 +2,9 @@
 
 [Korean](README.ko.md)
 
-**Runnable C# samples for evaluating OPNX.Lib and OPNX.UI.**
+**C# / .NET 10 samples for video streaming and WPF user interfaces.**
+
+Explore runnable OPNX.Lib and OPNX.UI examples covering a C# RTSP multi-view player, RTSP-to-WebRTC streaming and browser playback, a recording/event playback timeline, WPF controls, system resource monitoring, TCP messaging, Named Pipe and SharedMemory IPC, and in-memory EntityStore CRUD. Use the samples to evaluate Windows desktop video interfaces and communication workflows.
 
 RTSP viewer · WebRTC browser playback · Playback timeline · Control gallery · System monitoring · Protocol chat · EntityStore
 
@@ -10,6 +12,10 @@ RTSP viewer · WebRTC browser playback · Playback timeline · Control gallery �
 
 
 ## Choose A Starting Point
+
+- **RTSP desktop player:** `RtspViewer` decodes RTSP video with FFmpeg and displays it in a WPF MultiView.
+- **WebRTC browser player:** `WebRtcViewer` bridges an H.264 RTSP source to WebRTC for playback in WebView2 or an external browser on the same machine.
+- **Recording/event timeline UI:** `PlaybackTimeline` demonstrates time navigation, selection and appearance settings using simulated recordings and events; it does not play recorded media files.
 
 | Sample | What it demonstrates | Requirements |
 | --- | --- | --- |

@@ -2,14 +2,20 @@
 
 [English](README.md)
 
-**OPNX.Lib와 OPNX.UI를 직접 평가할 수 있는 C# 실행 샘플입니다.**
+**C# / .NET 10 기반 영상 스트리밍 및 WPF UI 샘플 모음입니다.**
 
-RTSP MultiView · FFmpeg 디코딩 · WPF 영상 · 재생 타임라인 · TCP / Named Pipe / SharedMemory · EntityStore
+OPNX.Lib와 OPNX.UI를 사용해 RTSP 멀티뷰 플레이어, WebRTC 브라우저 영상 재생, 녹화·이벤트 타임라인, WPF 컨트롤 갤러리, 시스템 리소스 모니터링, TCP·Named Pipe·SharedMemory 통신(IPC), 인메모리 EntityStore CRUD를 구현하는 실행 예제를 제공합니다. Windows 데스크톱 영상 UI와 통신 기능을 평가하고 사용 흐름을 살펴볼 수 있습니다.
+
+RTSP 뷰어 · WebRTC 브라우저 재생 · 재생 타임라인 · 컨트롤 갤러리 · 시스템 모니터링 · 프로토콜 채팅 · EntityStore
 
 [RTSP 뷰어 실행](#rtsp-viewer-실행) · [WebRTC 실행](#webrtc-viewer-실행) · [타임라인 실행](#playback-timeline-실행) · [OPNX.Lib](https://github.com/OPNXLabs/opnx-lib) · [OPNX.UI](https://github.com/OPNXLabs/opnx-ui) · [평가 및 OEM 문의](#상업-라이선스-및-oem-문의)
 
 
 ## 시작할 샘플을 선택하세요
+
+- **RTSP 데스크톱 플레이어:** `RtspViewer`는 RTSP 영상을 FFmpeg로 디코딩해 WPF MultiView에 표시합니다.
+- **WebRTC 브라우저 플레이어:** `WebRtcViewer`는 H.264 RTSP 소스를 WebRTC로 중계하고 WebView2 또는 같은 장비의 외부 브라우저에서 재생합니다.
+- **녹화·이벤트 타임라인 UI:** `PlaybackTimeline`은 모의 녹화 구간과 이벤트를 사용해 시간 탐색·선택·표시 설정을 보여줍니다. 실제 녹화 파일을 재생하는 샘플은 아닙니다.
 
 | 샘플 | 확인할 수 있는 기능 | 요구사항 |
 | --- | --- | --- |
