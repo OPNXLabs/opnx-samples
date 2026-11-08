@@ -51,7 +51,11 @@ Downloading a runtime for local evaluation and distributing that runtime to othe
 
 ### Previous runtime reference
 
-The short-lived bundled-runtime commits are being replaced in the main-branch history. Existing clones or forks may retain those DLLs; changing history does not change their licenses. The previous runtime was `n9.0.2-48-gd4070a14ce-20261107`, with original archive SHA-256 `1ca86821f7fd84c99be0be3a541bc936e26834cc9db49355853869c4f8ad3a98`, from [this upstream release](https://github.com/FFmpeg-Builds/FFmpeg-Builds/releases/tag/autobuild-2026-11-07-12-47), using [FFmpeg source revision d4070a14cecc7e29eb278f9b6036c2284255f70d](https://github.com/FFmpeg/FFmpeg/tree/d4070a14cecc7e29eb278f9b6036c2284255f70d). Original local files and build information are backed up for follow-up reference. This provenance is not a complete dependency-notice or corresponding-source bundle for that build.
+The short-lived bundled-runtime commits were replaced in the local main-branch history. Existing clones or forks may retain those DLLs; changing history does not change their licenses. The previous runtime was `n9.0.2-48-gd4070a14ce-20261107`, with original archive SHA-256 `1ca86821f7fd84c99be0be3a541bc936e26834cc9db49355853869c4f8ad3a98`, from [this upstream release](https://github.com/FFmpeg-Builds/FFmpeg-Builds/releases/tag/autobuild-2026-11-07-12-47), using [FFmpeg source revision d4070a14cecc7e29eb278f9b6036c2284255f70d](https://github.com/FFmpeg/FFmpeg/tree/d4070a14cecc7e29eb278f9b6036c2284255f70d). Original local files and build information are backed up for follow-up reference. This provenance is not a complete dependency-notice or corresponding-source bundle for that build.
+
+### Maintainer note: publishing the rewritten history
+
+The local history replaces the old DLL-bundling commits rather than merging them. If the remote branch still points to those earlier commits, a normal pull/merge reconnects that history and may restore the DLLs. Inspect the remote changes first; when authorized to publish this replacement history, use `git push --force-with-lease origin master`. If the lease fails, review the newly published remote changes before proceeding. Do not use an unconditional force push. Existing clones may need to reconcile their local branches with the rewritten remote history.
 
 ## 한국어 안내
 
@@ -63,4 +67,6 @@ RtspViewer를 평소처럼 빌드하면 최초 한 번 고정된 LGPL shared ZIP
 
 교체 가능한 LGPL 공유 라이브러리를 사용하는 현재 방식 자체만으로 OPNX.Lib·OPNX.UI·애플리케이션 자체 소스 코드를 공개해야 하는 것은 아닙니다. 다만 DLL을 다른 사람에게 재배포하면 FFmpeg 및 해당 의존성의 대응 소스·빌드 자료 제공과 고지, 라이브러리 교체 및 수정 디버깅 권리 등의 조건을 충족해야 합니다. 자동 다운로드 방식이 생성된 바이너리의 재배포 의무까지 없애 주는 것은 아닙니다.
 
-DLL을 잠시 포함했던 두 커밋은 주 브랜치 이력에서 새 커밋으로 대체합니다. 기존 클론·포크의 파일까지 회수하는 것은 아니며 해당 파일의 라이선스는 계속 적용됩니다. 이전 버전의 출처·체크섬·FFmpeg 소스 리비전은 위에 기록하고 원본 파일과 빌드 정보는 로컬에 보존했습니다. 이 출처 기록 자체가 해당 빌드의 전체 의존성 고지나 대응 소스 묶음을 대체하지는 않습니다.
+DLL을 잠시 포함했던 두 커밋은 로컬 주 브랜치 이력에서 새 커밋으로 대체했습니다. 기존 클론·포크의 파일까지 회수하는 것은 아니며 해당 파일의 라이선스는 계속 적용됩니다. 이전 버전의 출처·체크섬·FFmpeg 소스 리비전은 위에 기록하고 원본 파일과 빌드 정보는 로컬에 보존했습니다. 이 출처 기록 자체가 해당 빌드의 전체 의존성 고지나 대응 소스 묶음을 대체하지는 않습니다.
+
+관리자 참고: 원격에 예전 DLL 포함 커밋이 남아 있는 상태에서 일반 Pull·Merge를 하면 제거했던 이력이 다시 연결될 수 있습니다. 원격의 추가 변경을 확인한 후, 이력 교체를 반영할 때는 `git push --force-with-lease origin master`를 사용합니다. 보호 조건에 걸려 거절되면 원격의 새 변경을 먼저 검토하고 무조건 강제 푸시는 사용하지 않습니다.
