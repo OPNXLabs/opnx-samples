@@ -17,15 +17,15 @@ RTSP 뷰어 · WebRTC 브라우저 재생 · 재생 타임라인 · 컨트롤 �
 - **WebRTC 브라우저 플레이어:** `WebRtcViewer`는 H.264 RTSP 소스를 WebRTC로 중계하고 WebView2 또는 같은 장비의 외부 브라우저에서 재생합니다.
 - **녹화·이벤트 타임라인 UI:** `PlaybackTimeline`은 모의 녹화 구간과 이벤트를 사용해 시간 탐색·선택·표시 설정을 보여줍니다. 실제 녹화 파일을 재생하는 샘플은 아닙니다.
 
-| 샘플 | 확인할 수 있는 기능 | 요구사항 |
-| --- | --- | --- |
-| [`RtspViewer`](#rtsp-viewer-실행) | RTSP 입력, FFmpeg 디코딩, WPF 영상 표시, 카메라 탐색 및 구성 가능한 MultiView | Windows, .NET 10, FFmpeg 네이티브 DLL, RTSP 소스 |
-| [`WebRtcViewer`](#webrtc-viewer-실행) | RTSP → WebRTC → WebView2 / 브라우저 영상 재생과 수신 통계 | Windows, .NET 10, WebView2 Runtime, H.264 RTSP 소스 |
-| [`PlaybackTimeline`](#playback-timeline-실행) | 다채널 녹화 구간, 이벤트, 시간 탐색, 선택 및 타임라인 스타일 | Windows 및 .NET 10 |
-| [`ControlGallery`](#control-gallery-실행) | 기본·운영 컨트롤, 즉시 테마·강조색 전환, 트리/목록 검색·페이징 | Windows 및 .NET 10 |
-| [`SystemMonitoring`](#system-monitoring-실행) | OPNX.UI 기반 로컬 CPU·메모리·프로세스·네트워크·디스크·GPU 모니터링 | Windows 및 .NET 10 |
-| [`ProtocolChat`](#protocol-chat-실행) | TCP / Named Pipe / SharedMemory의 공통 채팅·요청응답·시간 초과·취소 | .NET 10, SharedMemory는 Windows 필요 |
-| [`EntityStore`](#entitystore-실행) | 메모리 기반 엔티티 CRUD, 조회, 복사/업데이트 및 변경 알림 | .NET 10 |
+| 샘플 | 미리보기 | 확인할 수 있는 기능 | 요구사항 |
+| --- | --- | --- | --- |
+| [`RtspViewer`](#rtsp-viewer-실행) | <a href="docs/images/rtsp-viewer.png"><img src="docs/images/rtsp-viewer.png" alt="OPNX RtspViewer" width="240"></a> | RTSP 입력, FFmpeg 디코딩, WPF 영상 표시, 카메라 탐색 및 구성 가능한 MultiView | Windows, .NET 10, 자동 복원되는 x64 FFmpeg 런타임, RTSP 소스 |
+| [`WebRtcViewer`](#webrtc-viewer-실행) | <a href="docs/images/webrtc-viewer.png"><img src="docs/images/webrtc-viewer.png" alt="OPNX WebRtcViewer" width="240"></a> | RTSP → WebRTC → WebView2 / 브라우저 영상 재생과 수신 통계 | Windows, .NET 10, WebView2 Runtime, H.264 RTSP 소스 |
+| [`PlaybackTimeline`](#playback-timeline-실행) | <a href="docs/images/playback-timeline.png"><img src="docs/images/playback-timeline.png" alt="OPNX PlaybackTimeline" width="240"></a> | 다채널 녹화 구간, 이벤트, 시간 탐색, 선택 및 타임라인 스타일 | Windows 및 .NET 10 |
+| [`ControlGallery`](#control-gallery-실행) | <a href="docs/images/control-gallery.png"><img src="docs/images/control-gallery.png" alt="OPNX ControlGallery" width="240"></a> | 기본·운영 컨트롤, 즉시 테마·강조색 전환, 트리/목록 검색·페이징 | Windows 및 .NET 10 |
+| [`SystemMonitoring`](#system-monitoring-실행) | <a href="docs/images/system-monitoring.png"><img src="docs/images/system-monitoring.png" alt="OPNX SystemMonitoring" width="240"></a> | OPNX.UI 기반 로컬 CPU·메모리·프로세스·네트워크·디스크·GPU 모니터링 | Windows 및 .NET 10 |
+| [`ProtocolChat`](#protocol-chat-실행) | — | TCP / Named Pipe / SharedMemory의 공통 채팅·요청응답·시간 초과·취소 | .NET 10, SharedMemory는 Windows 필요 |
+| [`EntityStore`](#entitystore-실행) | — | 메모리 기반 엔티티 CRUD, 조회, 복사/업데이트 및 변경 알림 | .NET 10 |
 
 > **라이선스:** OPNX Samples는 오픈 소스가 아닌 source-available 소프트웨어입니다. [LICENSE.txt](LICENSE.txt)에 따라 학습, 연구, 테스트 및 비상업적 평가에 사용할 수 있습니다. 상업적 사용, 운영 환경 사용, 재배포 및 OEM 통합에는 OPNX의 사전 서면 허가가 필요합니다. 샘플은 OPNX.Lib 또는 OPNX.UI에 대한 추가 권리를 부여하지 않습니다.
 > 기업 내부의 비운영 평가·PoC·기술 검토도 허용됩니다. 상세 범위는 아래 평가 안내와 영문 라이선스를 확인하세요.
@@ -60,7 +60,7 @@ RTSP 뷰어 · WebRTC 브라우저 재생 · 재생 타임라인 · 컨트롤 �
 
 영상 영역은 검정 배경을 유지합니다. WebRtcViewer의 HTML 플레이어는 WPF 내부에서 테마·강조색 메시지를 받으며 외부 브라우저에서는 기본 다크 테마로 표시됩니다. OPNX.UI는 WPF 화면에 사용하고, 실제 WebRTC 영상 재생은 브라우저의 `<video>`가 담당합니다.
 
-아래 실행 안내에 현재 Release 빌드의 실제 화면을 첨부했습니다. OPNX.V Dark / Blue 테마와 공통 이미지 크기를 사용하며 PC 이름과 로컬 경로는 가렸습니다. 캡처 상태는 [이미지 안내](docs/images/README.md)를 참고하세요.
+위 선택 표의 미리보기와 아래 실행 안내에 실제 Release 화면을 첨부했습니다. OPNX.V Dark / Blue 테마와 공통 이미지 크기를 사용하며 PC 이름과 로컬 경로는 가렸습니다. 캡처 상태는 [이미지 안내](docs/images/README.md)를 참고하세요.
 
 ## 사용한 OPNX 컴포넌트
 
@@ -121,7 +121,7 @@ OPNX 애플리케이션에서 상태 엔티티를 메모리에 유지하고 변�
 
 ## 빌드
 
-Windows의 .NET 10 SDK와 ASP.NET Core 10 공유 프레임워크를 준비합니다. 전체 솔루션에는 WPF 프로젝트가 포함됩니다. FFmpeg 네이티브 DLL은 RtspViewer 실행 시, WebView2 Runtime은 WebRtcViewer 실행 시에만 필요합니다.
+Windows의 .NET 10 SDK와 ASP.NET Core 10 공유 프레임워크를 준비합니다. 전체 솔루션에는 WPF 프로젝트가 포함됩니다. RtspViewer는 첫 빌드에서 x64 FFmpeg 런타임을 자동 다운로드·압축 해제하며 WebView2 Runtime은 WebRtcViewer 실행 시에만 별도로 필요합니다.
 
 ```powershell
 dotnet build .\OPNX.Samples.slnx -c Debug
@@ -131,7 +131,7 @@ dotnet build .\OPNX.Samples.slnx -c Debug
 
 ![OPNX RTSP Viewer](docs/images/rtsp-viewer.png)
 
-MultiView 배치와 소스 패널입니다. 캡처 환경에 FFmpeg 네이티브 DLL이 없어 초기화 오류가 표시되며 실제 영상은 재생하지 않습니다.
+FFmpeg 초기화 후 소스 등록 전 MultiView 화면입니다.
 
 ```powershell
 dotnet run --project src/OPNX.Samples.RtspViewer
@@ -141,7 +141,7 @@ dotnet run --project src/OPNX.Samples.RtspViewer
 
 ![OPNX WebRTC Viewer](docs/images/webrtc-viewer.png)
 
-연결 전 입력·브라우저 플레이어 화면입니다. 카메라 주소와 계정 정보는 비어 있습니다.
+RTSP 입력과 연결 전 브라우저 플레이어 화면입니다.
 
 ```powershell
 dotnet run --project src/OPNX.Samples.WebRtcViewer
@@ -157,7 +157,7 @@ OPNX.Lib의 RTSP-over-TCP 수신과 WebRTC H.264 송출을 연결하고, WebView
 
 ![OPNX Playback Timeline](docs/images/playback-timeline.png)
 
-모의 녹화 구간·Motion 이벤트·선택 정보와 Appearance 패널입니다.
+모의 녹화 구간·Motion 이벤트 선택·표시 설정 화면입니다.
 
 ```powershell
 dotnet run --project src/OPNX.Samples.PlaybackTimeline
@@ -167,7 +167,7 @@ dotnet run --project src/OPNX.Samples.PlaybackTimeline
 
 ![OPNX Control Gallery](docs/images/control-gallery.png)
 
-입력·검증·선택·날짜/시간·버튼·탐색·진행률 컨트롤입니다.
+입력·선택·날짜/시간·버튼·탐색·진행률 컨트롤 화면입니다.
 
 ![OPNX Control Gallery tree and paging](docs/images/control-gallery-data.png)
 
@@ -185,7 +185,7 @@ dotnet run --project src/OPNX.Samples.ControlGallery
 
 ![OPNX System Monitoring](docs/images/system-monitoring.png)
 
-실제 로컬 시스템 수집 화면입니다. PC 이름은 가렸습니다.
+실제 로컬 자원 수집 화면이며 PC 이름은 가렸습니다.
 
 ```powershell
 dotnet run --project src/OPNX.Samples.SystemMonitoring
@@ -233,51 +233,13 @@ dotnet run --project src/OPNX.Samples.EntityStore
 
 ## FFmpeg 네이티브 바이너리
 
-FFmpeg를 사용하는 샘플은 실행 시 호환되는 FFmpeg 네이티브 DLL이 필요합니다. 관리 코드 패키지인 `FFmpeg.AutoGen`에는 FFmpeg 네이티브 바이너리가 포함되어 있지 않습니다.
+RtspViewer는 첫 빌드에서 Windows x64 FFmpeg 9.0 계열 LGPL shared ZIP을 외부 배포처에서 직접 다운로드하고, 체크섬 검증 후 DLL 7개를 자동 압축 해제합니다. Visual Studio 또는 `dotnet build`로 빌드하면 Debug·Release 출력의 `FFMpeg/Lib/x64`로 복사되며 로컬 `dotnet publish` 출력에도 포함됩니다. 사용자가 ZIP을 풀거나 DLL을 복사할 필요가 없습니다. 첫 다운로드에는 인터넷이 필요하고 이후에는 로컬 캐시를 사용합니다.
 
-애플리케이션 실행 경로 기준으로 FFmpeg를 초기화하는 샘플은 아래 위치에 네이티브 DLL을 배치합니다.
+고정 버전은 `n9.0.2-39-g7adfbe40dc-20261031`입니다. 저장소에는 DLL 대신 복원 스크립트와 라이선스·빌드 정보를 보관합니다. `latest`가 아닌 날짜·파일명·SHA-256을 고정하며, 배포처의 월말 빌드는 2년 보관 정책입니다. [오프라인 빌드·다운로드 오류·대체 DLL 안내](docs/ffmpeg-runtime.md)와 [타사 고지](THIRD-PARTY-NOTICES.md)를 확인하세요.
 
-```text
-FFMpeg/Lib/x64
-FFMpeg/Lib/x86
-```
+`Add camera`의 이름은 실제 기본값 `Lobby Camera`로 채워집니다. RTSP URL은 직접 입력해야 하며 이름·URL 누락 또는 URL 형식 오류는 대화상자로 안내합니다. 계정과 비밀번호는 필요한 카메라에만 입력합니다.
 
-64비트 Debug 실행 기준의 실무적인 준비 순서는 다음과 같습니다.
-
-1. 먼저 솔루션을 한 번 빌드해서 출력 폴더를 생성합니다.
-2. 프로세스 아키텍처와 맞는 FFmpeg shared-library DLL을 준비합니다.
-3. 빌드 출력 폴더 아래에 `FFMpeg/Lib/x64` 디렉터리를 만듭니다.
-4. 준비한 FFmpeg DLL을 해당 디렉터리에 복사합니다.
-5. 샘플을 다시 실행합니다.
-
-예를 들어 64비트 Debug 출력 폴더에는 아래와 비슷한 파일들이 있어야 합니다.
-
-```text
-src/OPNX.Samples.RtspViewer/bin/Debug/net10.0-windows/FFMpeg/Lib/x64/avcodec-*.dll
-src/OPNX.Samples.RtspViewer/bin/Debug/net10.0-windows/FFMpeg/Lib/x64/avformat-*.dll
-src/OPNX.Samples.RtspViewer/bin/Debug/net10.0-windows/FFMpeg/Lib/x64/avutil-*.dll
-src/OPNX.Samples.RtspViewer/bin/Debug/net10.0-windows/FFMpeg/Lib/x64/avfilter-*.dll
-src/OPNX.Samples.RtspViewer/bin/Debug/net10.0-windows/FFMpeg/Lib/x64/avdevice-*.dll
-src/OPNX.Samples.RtspViewer/bin/Debug/net10.0-windows/FFMpeg/Lib/x64/swscale-*.dll
-src/OPNX.Samples.RtspViewer/bin/Debug/net10.0-windows/FFMpeg/Lib/x64/swresample-*.dll
-```
-
-샘플 화면에 `FFMPEG initialize failed`가 표시된다면, 상태 메시지에 표시된 경로에 DLL 파일이 있는지 먼저 확인합니다.
-
-또한 DLL 아키텍처가 실행 프로세스와 맞는지도 확인합니다.
-
-이 샘플 저장소에는 FFmpeg 바이너리를 커밋하지 않습니다.
-
-자체 빌드와 함께 FFmpeg 바이너리를 재배포한다면, 선택한 FFmpeg 빌드가 사용 목적에 맞게 재배포 가능한지 확인해야 합니다.
-
-또한 해당 FFmpeg 라이선스 조건을 준수해야 합니다.
-
-일반적으로 애플리케이션이 GPL 또는 nonfree 요구사항을 충족할 준비가 되어 있지 않다면, 동적 링크 방식의 LGPL 빌드를 사용하고 GPL/nonfree 구성 요소가 포함되지 않은 빌드를 선택하는 편이 좋습니다.
-
-참고:
-
-- https://ffmpeg.org/legal.html
-- https://ffmpeg.org/download.html
+WebRtcViewer·PlaybackTimeline·ControlGallery·SystemMonitoring에는 FFmpeg 네이티브 DLL이 필요하지 않습니다. `FFMPEG initialize failed`가 나오면 출력 폴더의 DLL 누락·차단 여부와 x64 프로세스 설정을 확인하세요. 교체 가능한 LGPL DLL을 사용하는 것 자체만으로 OPNX 애플리케이션 소스 공개 의무가 생기는 것은 아닙니다. DLL이 포함된 출력물을 재배포할 때는 해당 FFmpeg·의존성의 고지, 대응 소스 제공 및 라이브러리 교체 관련 조건을 준수해야 합니다.
 
 ## 패키지 의존성
 

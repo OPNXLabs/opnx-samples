@@ -17,15 +17,15 @@ RTSP viewer · WebRTC browser playback · Playback timeline · Control gallery �
 - **WebRTC browser player:** `WebRtcViewer` bridges an H.264 RTSP source to WebRTC for playback in WebView2 or an external browser on the same machine.
 - **Recording/event timeline UI:** `PlaybackTimeline` demonstrates time navigation, selection and appearance settings using simulated recordings and events; it does not play recorded media files.
 
-| Sample | What it demonstrates | Requirements |
-| --- | --- | --- |
-| [`RtspViewer`](#run-rtsp-viewer) | RTSP input, FFmpeg decoding, WPF video presentation, camera navigation, and configurable MultiView | Windows, .NET 10, FFmpeg native DLLs, RTSP source |
-| [`WebRtcViewer`](#run-webrtc-viewer) | RTSP → WebRTC → WebView2 / browser video, live receive statistics | Windows, .NET 10, WebView2 Runtime, H.264 RTSP source |
-| [`PlaybackTimeline`](#run-playback-timeline) | Multi-channel recording ranges, events, time navigation, selection, and timeline styling | Windows and .NET 10 |
-| [`ControlGallery`](#run-control-gallery) | Basic/operational controls, live themes and accents, tree/list search and paging | Windows and .NET 10 |
-| [`SystemMonitoring`](#run-system-monitoring) | Local CPU, memory, process, network, disk and GPU metrics with OPNX.UI controls | Windows and .NET 10 |
-| [`ProtocolChat`](#run-protocol-chat) | TCP / Named Pipe / SharedMemory with common chat, request/response, timeout, and cancellation logic | .NET 10; SharedMemory requires Windows |
-| [`EntityStore`](#run-entitystore) | In-memory entity CRUD, lookup, copy/update, and change notifications | .NET 10 |
+| Sample | Preview | What it demonstrates | Requirements |
+| --- | --- | --- | --- |
+| [`RtspViewer`](#run-rtsp-viewer) | <a href="docs/images/rtsp-viewer.png"><img src="docs/images/rtsp-viewer.png" alt="OPNX RtspViewer" width="240"></a> | RTSP input, FFmpeg decoding, WPF video presentation, camera navigation, and configurable MultiView | Windows, .NET 10, automatically restored x64 FFmpeg runtime, RTSP source |
+| [`WebRtcViewer`](#run-webrtc-viewer) | <a href="docs/images/webrtc-viewer.png"><img src="docs/images/webrtc-viewer.png" alt="OPNX WebRtcViewer" width="240"></a> | RTSP → WebRTC → WebView2 / browser video, live receive statistics | Windows, .NET 10, WebView2 Runtime, H.264 RTSP source |
+| [`PlaybackTimeline`](#run-playback-timeline) | <a href="docs/images/playback-timeline.png"><img src="docs/images/playback-timeline.png" alt="OPNX PlaybackTimeline" width="240"></a> | Multi-channel recording ranges, events, time navigation, selection, and timeline styling | Windows and .NET 10 |
+| [`ControlGallery`](#run-control-gallery) | <a href="docs/images/control-gallery.png"><img src="docs/images/control-gallery.png" alt="OPNX ControlGallery" width="240"></a> | Basic/operational controls, live themes and accents, tree/list search and paging | Windows and .NET 10 |
+| [`SystemMonitoring`](#run-system-monitoring) | <a href="docs/images/system-monitoring.png"><img src="docs/images/system-monitoring.png" alt="OPNX SystemMonitoring" width="240"></a> | Local CPU, memory, process, network, disk and GPU metrics with OPNX.UI controls | Windows and .NET 10 |
+| [`ProtocolChat`](#run-protocol-chat) | — | TCP / Named Pipe / SharedMemory with common chat, request/response, timeout, and cancellation logic | .NET 10; SharedMemory requires Windows |
+| [`EntityStore`](#run-entitystore) | — | In-memory entity CRUD, lookup, copy/update, and change notifications | .NET 10 |
 
 > **License:** OPNX Samples is source-available, not open-source. Learning, research, testing, and non-commercial evaluation are permitted under [LICENSE.txt](LICENSE.txt). Commercial use, production use, redistribution, and OEM integration require prior written permission from OPNX. The samples do not grant additional rights to OPNX.Lib or OPNX.UI.
 > Internal non-production evaluation, proof of concept, and technical review by commercial organizations are also permitted. See the evaluation guidance below and the English license for scope.
@@ -60,7 +60,7 @@ The five WPF samples share a title bar, cards/panels, status feedback, and OPNX.
 
 Video surfaces remain black. The embedded WebRtcViewer HTML player receives palette messages from WPF; an external browser uses its default dark palette. OPNX.UI supplies the desktop controls, while the browser's native `<video>` presents WebRTC media.
 
-Current Release screenshots appear with the run instructions below, using OPNX.V Dark / Blue and a common image canvas. Machine name and local path are redacted. See the [image notes](docs/images/README.md) for capture states.
+Release screenshots appear in the starting-point previews and run instructions, using OPNX.V Dark / Blue and a common image canvas. Machine name and local path are redacted. See the [image notes](docs/images/README.md) for capture states.
 
 ## Used OPNX Components
 
@@ -123,7 +123,7 @@ This sample keeps database setup out of the default path so it can run without e
 
 ## Build
 
-Use the .NET 10 SDK on Windows with the ASP.NET Core 10 shared framework. The full solution includes WPF projects. FFmpeg native DLLs are needed to run RtspViewer; the WebView2 Runtime is needed to run WebRtcViewer.
+Use the .NET 10 SDK on Windows with the ASP.NET Core 10 shared framework. The full solution includes WPF projects. RtspViewer automatically downloads and extracts its x64 FFmpeg runtime on the first build; the WebView2 Runtime is needed to run WebRtcViewer.
 
 ```powershell
 dotnet build .\OPNX.Samples.slnx -c Debug
@@ -133,7 +133,7 @@ dotnet build .\OPNX.Samples.slnx -c Debug
 
 ![OPNX RTSP Viewer](docs/images/rtsp-viewer.png)
 
-MultiView layout and source panel. FFmpeg native DLLs were unavailable in the capture environment; the initialization error is visible and no video is playing.
+FFmpeg initialized; source registration and MultiView before connection.
 
 ```powershell
 dotnet run --project src/OPNX.Samples.RtspViewer
@@ -143,7 +143,7 @@ dotnet run --project src/OPNX.Samples.RtspViewer
 
 ![OPNX WebRTC Viewer](docs/images/webrtc-viewer.png)
 
-Input and embedded browser player before connection; camera address and credentials are empty.
+RTSP input and browser player before connection.
 
 ```powershell
 dotnet run --project src/OPNX.Samples.WebRtcViewer
@@ -159,7 +159,7 @@ The relay binds to `127.0.0.1` on an automatically selected port and uses an eph
 
 ![OPNX Playback Timeline](docs/images/playback-timeline.png)
 
-Simulated recording ranges, motion event selection and the Appearance inspector.
+Simulated recording ranges, motion event selection and appearance settings.
 
 ```powershell
 dotnet run --project src/OPNX.Samples.PlaybackTimeline
@@ -169,7 +169,7 @@ dotnet run --project src/OPNX.Samples.PlaybackTimeline
 
 ![OPNX Control Gallery](docs/images/control-gallery.png)
 
-Input, validation, selection, date/time, command, navigation and progress controls.
+Input, selection, date/time, command, navigation and progress controls.
 
 ![OPNX Control Gallery tree and paging](docs/images/control-gallery-data.png)
 
@@ -235,51 +235,13 @@ All five WPF samples use the same common-brush palettes and control styles from 
 
 ## FFmpeg Native Binaries
 
-Only `RtspViewer` initializes FFmpeg in these samples and requires compatible FFmpeg native DLLs at runtime. The managed `FFmpeg.AutoGen` package does not include FFmpeg native binaries.
+On its first build, RtspViewer downloads a Windows x64 FFmpeg 9.0-series LGPL shared ZIP directly from the upstream binary publisher, verifies checksums and automatically extracts seven DLLs. Visual Studio and `dotnet build` copy them to `FFMpeg/Lib/x64` in Debug and Release output; local `dotnet publish` output includes them too. No manual ZIP extraction or DLL copy is required. The first download needs internet access; later builds use the local cache.
 
-For samples that initialize FFmpeg from the application directory, place the native DLLs under this application-relative path:
+The pinned version is `n9.0.2-39-g7adfbe40dc-20261031`. The repository contains restoration scripts and license/build information rather than DLLs. The URL, filename and SHA-256 are fixed instead of using `latest`; upstream monthly builds have a two-year retention policy. See [offline builds, download errors and replacement DLLs](docs/ffmpeg-runtime.md) and [third-party notices](THIRD-PARTY-NOTICES.md).
 
-```text
-FFMpeg/Lib/x64
-FFMpeg/Lib/x86
-```
+`Add camera` starts with the actual name `Lobby Camera`. Enter an RTSP URL; missing names/URLs and malformed URLs produce a validation dialog. Supply account/password only if required by the camera.
 
-A practical setup for a 64-bit Debug run is:
-
-1. Build the solution once so the output directory is created.
-2. Prepare FFmpeg shared-library DLLs that match the process architecture.
-3. Create the `FFMpeg/Lib/x64` directory under the build output.
-4. Copy the FFmpeg DLLs into that directory.
-5. Run the sample again.
-
-For example, the 64-bit Debug output should contain files similar to:
-
-```text
-src/OPNX.Samples.RtspViewer/bin/Debug/net10.0-windows/FFMpeg/Lib/x64/avcodec-*.dll
-src/OPNX.Samples.RtspViewer/bin/Debug/net10.0-windows/FFMpeg/Lib/x64/avformat-*.dll
-src/OPNX.Samples.RtspViewer/bin/Debug/net10.0-windows/FFMpeg/Lib/x64/avutil-*.dll
-src/OPNX.Samples.RtspViewer/bin/Debug/net10.0-windows/FFMpeg/Lib/x64/avfilter-*.dll
-src/OPNX.Samples.RtspViewer/bin/Debug/net10.0-windows/FFMpeg/Lib/x64/avdevice-*.dll
-src/OPNX.Samples.RtspViewer/bin/Debug/net10.0-windows/FFMpeg/Lib/x64/swscale-*.dll
-src/OPNX.Samples.RtspViewer/bin/Debug/net10.0-windows/FFMpeg/Lib/x64/swresample-*.dll
-```
-
-If the sample shows `FFMPEG initialize failed`, first check the directory reported by the status message.
-
-Also make sure the DLL architecture matches the process architecture.
-
-FFmpeg binaries are not committed to this samples repository.
-
-If you redistribute FFmpeg binaries with your own build, make sure the selected FFmpeg build is redistributable for your use case.
-
-Also comply with the matching FFmpeg license terms.
-
-In general, prefer an LGPL build that is dynamically linked and built without GPL or nonfree components unless your application is prepared to satisfy GPL/nonfree requirements.
-
-Useful references:
-
-- https://ffmpeg.org/legal.html
-- https://ffmpeg.org/download.html
+WebRtcViewer, PlaybackTimeline, ControlGallery and SystemMonitoring do not require native FFmpeg DLLs. If `FFMPEG initialize failed` appears, check for missing/blocked DLLs in the output directory and confirm x64 execution. Using a replaceable LGPL DLL does not by itself require publishing OPNX application source. Redistributing output that includes the DLLs requires compliance with the actual FFmpeg/dependency licenses, including applicable notices, corresponding-source access and library-replacement rights.
 
 ## Package Dependencies
 

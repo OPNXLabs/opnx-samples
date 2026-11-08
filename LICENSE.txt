@@ -39,7 +39,11 @@ All rights, title, interest, and intellectual property rights in the OPNX-owned 
 
 5. Dependencies And Native Runtimes
 
-OPNX.Lib, OPNX.UI, FFmpeg, the Microsoft.Web.WebView2 SDK, the Microsoft Edge WebView2 Runtime, and all other dependencies are governed by their respective licenses and notices. FFmpeg native binaries are not licensed or distributed under this license. Anyone obtaining, bundling, redistributing, or deploying such binaries is responsible for the applicable license obligations of the selected build.
+OPNX.Lib, OPNX.UI, FFmpeg, the Microsoft.Web.WebView2 SDK, the Microsoft Edge WebView2 Runtime, and all other dependencies are governed by their respective licenses and notices. Bundled FFmpeg native binaries are separately licensed and are not governed by this license. Anyone obtaining, bundling, redistributing, or deploying such binaries is responsible for the applicable license obligations of the selected build.
+
+The restrictions and termination provisions of this license apply only to the OPNX-owned Software. They do not limit any rights independently granted by a third-party license, including rights to use, copy, modify, or redistribute an LGPL-covered library. For a work combined with an LGPL-covered library, modification of the library portions and reverse engineering for debugging such modifications are permitted to the extent required by the applicable LGPL. An interface-compatible replacement shared library may be used; the OPNX license does not require use of an unmodified FFmpeg binary.
+
+Distributing LGPL-covered FFmpeg binaries may require providing the corresponding source for FFmpeg and covered dependencies, together with relevant build materials and notices. This is distinct from publishing the source code of an application that uses a replaceable shared library. Dynamic linking alone does not require publication of the OPNX-owned application source under the LGPL; the applicable license conditions must still be met.
 
 See THIRD-PARTY-NOTICES.md for additional notices.
 

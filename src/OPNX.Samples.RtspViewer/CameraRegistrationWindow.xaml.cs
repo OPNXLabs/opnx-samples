@@ -1,13 +1,12 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Input;
 
 namespace OPNX.Samples.RtspViewer;
 
 public partial class CameraRegistrationWindow : Window, INotifyPropertyChanged
 {
-    private string _cameraName = string.Empty;
+    private string _cameraName = "Lobby Camera";
     private string _rtspUrl = string.Empty;
     private string _cameraAccount = string.Empty;
     private string _cameraPassword = string.Empty;
@@ -53,17 +52,33 @@ public partial class CameraRegistrationWindow : Window, INotifyPropertyChanged
         DialogResult = false;
     }
 
-    private void CameraRegistrationWindow_KeyUp(object sender, KeyEventArgs e)
-    {
-        if (e.Key == Key.Enter)
-            Accept();
-    }
-
     private void Accept()
     {
-        if (string.IsNullOrWhiteSpace(CameraName) || string.IsNullOrWhiteSpace(RtspUrl))
+        if (string.IsNullOrWhiteSpace(CameraName))
+        {
+            MessageBox.Show(this, "Enter a camera name.", "Add camera", MessageBoxButton.OK, MessageBoxImage.Information);
+            CameraNameBox.Focus();
             return;
+        }
 
+        if (string.IsNullOrWhiteSpace(RtspUrl))
+        {
+            MessageBox.Show(this, "Enter the RTSP URL for this camera.", "Add camera", MessageBoxButton.OK, MessageBoxImage.Information);
+            RtspUrlBox.Focus();
+            return;
+        }
+
+        if (!Uri.TryCreate(RtspUrl.Trim(), UriKind.Absolute, out var uri)
+            || !string.Equals(uri.Scheme, "rtsp", StringComparison.OrdinalIgnoreCase)
+            || string.IsNullOrWhiteSpace(uri.Host))
+        {
+            MessageBox.Show(this, "Enter a valid RTSP URL, such as rtsp://host:554/stream.", "Add camera", MessageBoxButton.OK, MessageBoxImage.Warning);
+            RtspUrlBox.Focus();
+            return;
+        }
+
+        CameraName = CameraName.Trim();
+        RtspUrl = RtspUrl.Trim();
         DialogResult = true;
     }
 

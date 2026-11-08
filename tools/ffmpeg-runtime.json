@@ -1,0 +1,19 @@
+{
+  "version": "n9.0.2-39-g7adfbe40dc-20261031",
+  "variant": "win64-lgpl-shared-9.0",
+  "release": "autobuild-2026-10-31-12-59",
+  "url": "https://github.com/FFmpeg-Builds/FFmpeg-Builds/releases/download/autobuild-2026-10-31-12-59/ffmpeg-n9.0.2-39-g7adfbe40dc-win64-lgpl-shared-9.0.zip",
+  "archiveName": "ffmpeg-n9.0.2-39-g7adfbe40dc-win64-lgpl-shared-9.0.zip",
+  "archiveSha256": "e907b01fa4783913151237e37df2a10fa97d99a1598a021bf59d4ae62ffed4c0",
+  "archiveRoot": "ffmpeg-n9.0.2-39-g7adfbe40dc-win64-lgpl-shared-9.0",
+  "ffmpegRevision": "7adfbe40dc",
+  "files": {
+    "swresample-7.dll": "12b907ddfff765e10c3b7da1a7985513dc9282c08953259f337f952f7b8a9f2a",
+    "swscale-10.dll": "40c20c66f9bdf08a79453056bd40293ff234927e8c4a1bae5fafdcf97da3be42",
+    "avutil-61.dll": "cb50cdee16a5031090330997b51c016fe7788487150cd07fa20ddbda4d108d09",
+    "avfilter-12.dll": "a56c3f9b6becf4809ee63f85fe1120bbbece56dd2ad700cf2403f8c36499ed4a",
+    "avcodec-63.dll": "c20d1a5b282a83b5bc586b65b23cf4837d83c2caa3b4dd4863ede2dd0f1858b5",
+    "avformat-63.dll": "7c13073a52f7ad76cfc1c7e76d782e89d88c1155cf2500c3320d034b507605f6",
+    "avdevice-63.dll": "a806e0c109646c3dacdfadbf2a9bb33b1e8e4fa8b1d49b6e27c025e27f12ee60"
+  }
+}

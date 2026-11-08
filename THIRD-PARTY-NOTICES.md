@@ -35,7 +35,11 @@ Some samples can interoperate with FFmpeg native shared libraries through OPNX.L
 - Project: [https://ffmpeg.org/](https://ffmpeg.org/)
 - License: depends on the selected build and enabled components
 
-FFmpeg native binaries are not included in this repository. Anyone obtaining, bundling, redistributing, or deploying FFmpeg binaries is responsible for complying with the license terms that apply to the selected build. FFmpeg is generally available under `LGPL-2.1-or-later`, while some configurations may cause GPL or nonfree terms to apply.
+RtspViewer restores the pinned Windows x64 LGPL v3 shared build `n9.0.2-39-g7adfbe40dc-20261031` directly from the upstream publisher at local build time. FFmpeg DLLs/archives are not included in the current repository tree; they are cached in ignored local folders. The download URL, archive checksum and per-DLL checksums are recorded in [tools/ffmpeg-runtime.json](https://github.com/OPNXLabs/opnx-samples/blob/master/tools/ffmpeg-runtime.json). See [runtime information](https://github.com/OPNXLabs/opnx-samples/blob/master/src/OPNX.Samples.RtspViewer/FFMpeg/Lib/x64/README.txt), `BUILD-INFO.txt`, `LICENSE.FFmpeg.txt` and `COPYING.GPLv3.txt` for configuration and license texts. Other samples do not restore this runtime.
+
+FFmpeg is used under its own license, independently of OPNX-owned code. The current dynamically linked, replaceable LGPL build does not by itself require release of OPNX application source. LGPL library modification/replacement and reverse engineering to debug such modifications are permitted as required by the applicable license; OPNX's restrictions do not override those rights.
+
+A local build/publish output includes downloaded third-party binaries. Anyone redistributing that output must provide all applicable notices and the required corresponding-source/build-material access for the actual FFmpeg build and its covered dependencies. The scripts and FFmpeg source URL alone are not a complete corresponding-source bundle. Other FFmpeg builds can have different GPL/nonfree conditions. See [restoration and redistribution guidance](docs/ffmpeg-runtime.md) for offline builds, replacement libraries and the provenance of the previous runtime.
 
 References:
 

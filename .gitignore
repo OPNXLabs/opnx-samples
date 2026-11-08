@@ -1,4 +1,4 @@
-﻿# Build outputs
+# Build outputs
 bin/
 obj/
 artifacts/
@@ -12,6 +12,7 @@ artifacts/
 *.sln.docstates
 
 # Local CLI/cache folders
+.cache/
 .dotnet/
 .nuget/
 
@@ -26,3 +27,8 @@ artifacts/
 # Local FFmpeg native runtimes
 **/FFMpeg/Lib/
 **/FFmpeg/Lib/
+
+# Keep runtime documentation, not downloaded native binaries.
+!src/OPNX.Samples.RtspViewer/FFMpeg/Lib/
+!src/OPNX.Samples.RtspViewer/FFMpeg/Lib/x64/
+!src/OPNX.Samples.RtspViewer/FFMpeg/Lib/x64/*.txt

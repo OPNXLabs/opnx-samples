@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -8,6 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Platforms>AnyCPU;x64</Platforms>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,4 +20,10 @@
     <Compile Include="..\Shared\Themes\SampleTheme.cs" Link="SampleTheme.cs" />
     <Page Include="..\Shared\Themes\Controls.xaml" Link="Themes\Controls.xaml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="FFMpeg\Lib\x64\**\*" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Include="..\..\THIRD-PARTY-NOTICES.md;..\..\LICENSE.txt;..\..\LICENSE.ko.txt" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Include="..\..\docs\ffmpeg-runtime.md" Link="docs\ffmpeg-runtime.md" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+  <Import Project="..\..\tools\FFmpeg.Runtime.targets" />
 </Project>
