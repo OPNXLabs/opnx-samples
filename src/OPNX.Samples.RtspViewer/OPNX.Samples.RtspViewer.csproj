@@ -25,5 +25,5 @@
     <None Include="..\..\THIRD-PARTY-NOTICES.md;..\..\LICENSE.txt;..\..\LICENSE.ko.txt" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <None Include="..\..\docs\ffmpeg-runtime.md" Link="docs\ffmpeg-runtime.md" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
-  <Import Project="..\..\tools\FFmpeg.Runtime.targets" />
+  <Import Project="Build\FFmpeg.Runtime.targets" />
 </Project>

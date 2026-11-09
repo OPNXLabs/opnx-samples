@@ -12,7 +12,7 @@ Download: https://github.com/FFmpeg-Builds/FFmpeg-Builds/releases/download/autob
 FFmpeg source revision: 7adfbe40dc
 FFmpeg source: https://github.com/FFmpeg/FFmpeg/tree/7adfbe40dc
 Build recipes: https://github.com/FFmpeg-Builds/FFmpeg-Builds
-Manifest with per-DLL hashes: tools/ffmpeg-runtime.json
+Manifest with per-DLL hashes: src/OPNX.Samples.RtspViewer/Build/ffmpeg-runtime.json
 Restoration and distribution guidance: docs/ffmpeg-runtime.md
 
 Copyright (c) 2000-2026 the FFmpeg developers and respective dependency authors.

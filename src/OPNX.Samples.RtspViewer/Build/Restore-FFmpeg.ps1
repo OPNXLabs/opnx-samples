@@ -12,7 +12,7 @@ Add-Type -AssemblyName System.IO.Compression.FileSystem
 $manifest = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'ffmpeg-runtime.json') -Raw | ConvertFrom-Json
 $files = @($manifest.files.PSObject.Properties)
 $destinationPath = [IO.Path]::GetFullPath($Destination)
-$cacheRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\.cache\ffmpeg'))
+$cacheRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..\..\.cache\ffmpeg'))
 [IO.Directory]::CreateDirectory($cacheRoot) | Out-Null
 [IO.Directory]::CreateDirectory($destinationPath) | Out-Null
 
@@ -74,7 +74,7 @@ try {
         }
     }
     if ((Get-Sha256 $archive) -ne $manifest.archiveSha256) {
-        throw "FFmpeg archive SHA-256 mismatch: $archive. Obtain the pinned archive from tools/ffmpeg-runtime.json; no files have been extracted."
+        throw "FFmpeg archive SHA-256 mismatch: $archive. Obtain the pinned archive from src/OPNX.Samples.RtspViewer/Build/ffmpeg-runtime.json; no files have been extracted."
     }
     $zip = [IO.Compression.ZipFile]::OpenRead($archive)
     try {

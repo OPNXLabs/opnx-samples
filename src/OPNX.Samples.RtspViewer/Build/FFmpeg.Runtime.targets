@@ -2,7 +2,7 @@
   <PropertyGroup>
     <FFmpegAutoRestore Condition="'$(FFmpegAutoRestore)' == ''">true</FFmpegAutoRestore>
     <FFmpegAllowDownload Condition="'$(FFmpegAllowDownload)' == ''">true</FFmpegAllowDownload>
-    <FFmpegRuntimeDirectory Condition="'$(FFmpegRuntimeDirectory)' == ''">$(MSBuildThisFileDirectory)..\.cache\ffmpeg\n9.0.2-39-g7adfbe40dc-20261031\x64</FFmpegRuntimeDirectory>
+    <FFmpegRuntimeDirectory Condition="'$(FFmpegRuntimeDirectory)' == ''">$(MSBuildThisFileDirectory)..\..\..\.cache\ffmpeg\n9.0.2-39-g7adfbe40dc-20261031\x64</FFmpegRuntimeDirectory>
   </PropertyGroup>
   <!-- Add generated files before assigning output/publish paths, including on a first build. -->
   <Target Name="PrepareFFmpegRuntime" BeforeTargets="AssignTargetPaths" Condition="'$(DesignTimeBuild)' != 'true'">
